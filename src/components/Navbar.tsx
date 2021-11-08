@@ -27,7 +27,7 @@ export default function Navbar() {
                     </button>
                 </div>
                 </div>
-                <div className={"flex-grow w-full px-8 menu lg:flex lg:items-center lg:w-auto lg:px-3 " + expanded}>
+                <div className={`flex-grow w-full px-8 menu lg:flex lg:items-center lg:w-auto lg:px-3 ${expanded}`}>
                 <div className="font-bold text-white text-md lg:flex-grow">
                     <a href="#responsive-header" className="block px-4 py-2 mt-4 mr-2 duration-500 ease-in-out hover:scale-110 lg:inline-block lg:mt-0 hover:text-black hover:bg-gray-300">
                     Guides
