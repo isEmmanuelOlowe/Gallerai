@@ -33,7 +33,7 @@ export default function Navbar() {
                     <span className="text-xl font-semibold tracking-tight duration-300 ease-in-out hover:scale-110"><Link href="/"><a>GALLERAI</a></Link></span>
                 </div>
                 <div className="block lg:hidden" onClick={() => setExpanded(expanded === "hidden"? "": "hidden")}>
-                    <button id="nav" className="flex items-center px-3 py-2 text-gray-200 border-2 border-gray-200 rounded hover:text-gray-700 hover:border-gray-700">
+                    <button id="nav" className="flex items-center px-3 py-2 text-black border-2 border-black rounded">
                     <svg className="w-3 h-3 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title>
                         <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
                     </svg>
