@@ -18,7 +18,7 @@ export default function explore ({pages}: props) {
       <>
       <Navbar/>
       <div className="flex flex-wrap justify-center">
-        {router.isFallback? (<h1>Loading</h1>):(Object.entries(pages).map(([key, page]: IPages) => {
+        {router.isFallback? (<h1>Loading</h1>):(Object.entries(pages).map(([key, page]) => {
           return (<Card key={key} page={page}/>)
         }))}
       </div>
