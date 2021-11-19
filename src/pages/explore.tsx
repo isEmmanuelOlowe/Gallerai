@@ -6,21 +6,20 @@ import { DataContext } from "@/data/AppData";
 import Card from "@/components/card";
 import Navbar from "@/components/Navbar";
 
-import { getPages, IPage, IPages } from "@/notion/notion";
+import { getPages, IPages } from "@/notion/notion";
 
 interface props {
   pages: IPages
 }
 
-export default function explore ({pages}: props) {
-    const router = useRouter();
+export default function Explore ({pages}: props) {
     return(
       <>
       <Navbar/>
       <div className="flex flex-wrap justify-center">
-        {router.isFallback? (<h1>Loading</h1>):(Object.entries(pages).map(([key, page]) => {
+        {Object.entries(pages).map(([key, page]) => {
           return (<Card key={key} page={page}/>)
-        }))}
+        })}
       </div>
 
       </>
