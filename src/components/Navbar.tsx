@@ -2,6 +2,25 @@ import Link from 'next/link';
 import * as React from 'react';
 import { useEffect,useState } from 'react';
 
+const navItems = [
+    {
+        name: "Timeline",
+        url: "#"
+    },
+    {
+        name: "Explore",
+        url: "/explore"
+    },
+    {
+        name: "Guides",
+        url: "#"
+    },
+    {
+        name: "Exhibits",
+        url: "#"
+    }
+]
+
 export default function Navbar() {
     const [expanded, setExpanded] = useState("hidden");
     const [scrollY, setScrollY] = useState(0);
@@ -42,15 +61,11 @@ export default function Navbar() {
                 </div>
                 <div className={`flex-grow w-full px-8 menu lg:flex lg:items-center lg:w-auto lg:px-3 ${expanded}`}>
                 <div className="font-bold text-md lg:flex-grow">
-                    <Link href="/explore"><a className="block px-4 py-2 mt-4 mr-2 duration-500 ease-in-out hover:bg-opacity-50 hover:scale-110 lg:inline-block lg:mt-0 hover:text-black hover:bg-gray-300">
-                    Explore
-                    </a></Link>
-                    <a href="#responsive-header" className="block px-4 py-2 mt-4 mr-2 duration-500 ease-in-out hover:bg-opacity-50 hover:scale-110 lg:inline-block lg:mt-0 hover:text-black hover:bg-gray-300">
-                    Guides
-                    </a>
-                    <a href="#responsive-header" className="block px-4 py-2 mt-4 mr-2 duration-500 ease-in-out hover:bg-opacity-50 hover:scale-110 lg:inline-block lg:mt-0 hover:text-black hover:bg-gray-300">
-                    Exhibits
-                    </a>
+                    {navItems.map(navItem => {
+                        return (
+                            <Link key={navItem.name} href={navItem.url}><a className="block px-4 py-2 mt-4 mr-2 duration-200 ease-in-out hover:bg-opacity-50 hover:scale-105 lg:inline-block lg:mt-0 hover:text-black">{navItem.name}</a></Link>
+                        )
+                    })}
                 </div>
                 {/* This is an example component */}
                 <div className="relative mx-auto text-gray-600 lg:block">
