@@ -19,7 +19,7 @@ export interface IPage {
   content: string[],
 }
 export async function getTags(): Promise<ITag[]> {
-  const response = await notion.databases.retrieve({database_id: databaseID});
+  const response: any = await notion.databases.retrieve({database_id: databaseID});
   const tags: ITag[] = response["properties"]["Tags"]["multi_select"]["options"];
   return tags;
 }
