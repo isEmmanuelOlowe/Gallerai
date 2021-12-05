@@ -41,8 +41,8 @@ export interface IPage {
   cover: string|null,
   title: string,
   tags: string[],
-  from: number,
-  to: number,
+  from?: number,
+  to?: number,
   // related pages
   related: string[],
   // sources

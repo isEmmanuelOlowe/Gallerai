@@ -40,10 +40,6 @@ export default function Article({article}: IProps) {
   )
 }
 
-interface IParams extends ParsedUrlQuery {
-    slug: string
-}
-
 export async function getStaticProps({ params, preview = false}: any) {
   // const data = await getPostAndMorePosts(params.slug, preview, previewData)
   const articles: IPages = await getPages()
