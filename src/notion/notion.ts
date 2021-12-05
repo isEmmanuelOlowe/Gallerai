@@ -6,18 +6,51 @@ export interface IPages {
     [Key: string]: IPage;
 }
 
+export interface ISources {
+  [key: string]: ISource;
+}
+
 export interface ITag {
   id: string;
   name: string;
   color: string;
 }
 
+export interface IContent {
+  type: string,
+  content: string,
+}
+
+export interface ISource {
+  type: string,
+  name: string
+  content: IContent[],
+  authors: string[],
+  isbn?: string,
+  publisher: string,
+  year: number,
+  url: string,
+  pdf?: string,
+  extracts?: string,
+  file?: string
+  related?: string[]
+}
+
 export interface IPage {
   id: string,
+  cover: string|null,
   title: string,
   tags: string[],
-  content: string[],
+  from: number,
+  to: number,
+  // related pages
+  related: string[],
+  // sources
+  sources: string[]
+  // page content
+  content: IContent[],
 }
+
 export async function getTags(): Promise<ITag[]> {
   const response: any = await notion.databases.retrieve({database_id: databaseID});
   const tags: ITag[] = response["properties"]["Tags"]["multi_select"]["options"];
@@ -38,6 +71,7 @@ async function getPageData(data_json:any): Promise<IPages> {
     const pageData: IPage = {
       id: page["id"],
       title: page["properties"]["Name"]["title"][0]["text"]["content"],
+      cover: getCover(page),
       tags: [],
       content: [],
     }
@@ -51,7 +85,7 @@ async function getPageData(data_json:any): Promise<IPages> {
     for (let i = 0; i < content.length; i++) {
       pageData.content.push(content[i]["paragraph"]["text"][0]["plain_text"]);
     }
-    pages[pageData.title] = pageData;
+    pages[cleanString(pageData.title)] = pageData;
   }
   return pages
 }
@@ -62,4 +96,17 @@ function stripTags(tags: ITag[]): string[] {
     tagArray.push(tags[i].name);
   }
   return tagArray
+}
+
+function getCover(page: any): string | null {
+  if (!(page["properties"]["Cover Image"]["files"].length === 0)) {
+    return(page["properties"]["Cover Image"]["files"][0]["file"]["url"])
+  }
+  else {
+    return null;
+  }
+}
+
+function cleanString(text: string): string {
+  return(text.replace("/[/.?=&:#]+/g", ""))
 }

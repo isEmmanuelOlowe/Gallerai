@@ -5,7 +5,7 @@ import { useEffect,useState } from 'react';
 const navItems = [
     {
         name: "Timeline",
-        url: "#"
+        url: "/timeline"
     },
     {
         name: "Explore",
@@ -13,11 +13,15 @@ const navItems = [
     },
     {
         name: "Guides",
-        url: "#"
+        url: "/guides"
     },
     {
         name: "Exhibits",
-        url: "#"
+        url: "/exhibits"
+    },
+    {
+        name: "Sources",
+        url: "/sources"
     }
 ]
 
@@ -30,7 +34,7 @@ export default function Navbar() {
         const handleScroll = () => {
             setScrollY(window.scrollY);
             if (window.scrollY > 1) {
-                setBG("bg-gray-200 border-solid border-gray-700 shadow")
+                setBG("bg-black text-white border-solid border-gray-700 shadow")
             }
             else {
                 setBG("bg-transparent text-gray-800 border-none")
@@ -46,13 +50,13 @@ export default function Navbar() {
     }, []); 
     return (
         <>
-            <nav className={"z-50 bg-opacity-40 sticky top-0 flex flex-wrap items-center justify-between min-w-full py-4 border-none first-letter:fixed lg:px-12 " + bg}>
+            <nav className={"z-50 sticky top-0 flex flex-wrap items-center justify-between min-w-full py-4 border-none first-letter:fixed lg:px-12 " + bg}>
                 <div className="flex justify-between w-full h-full pl-6 pr-2 border-gray-300 border-solid lg:w-auto lg:border-b-0 lg:pb-0">
                 <div className="flex items-center flex-shrink-0 h-full mr-16 ">
                     <span className="text-xl font-semibold tracking-tight duration-300 ease-in-out hover:scale-110"><Link href="/"><a>GALLERAI</a></Link></span>
                 </div>
                 <div className="block lg:hidden" onClick={() => setExpanded(expanded === "hidden"? "": "hidden")}>
-                    <button id="nav" className="flex items-center px-3 py-2 text-black border-2 border-black rounded">
+                    <button id="nav" className="flex items-center px-3 py-2 border-2 rounded border-inherit">
                     <svg className="w-3 h-3 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title>
                         <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
                     </svg>
@@ -63,7 +67,7 @@ export default function Navbar() {
                 <div className="font-bold text-md lg:flex-grow">
                     {navItems.map(navItem => {
                         return (
-                            <Link key={navItem.name} href={navItem.url}><a className="block px-4 py-2 mt-4 mr-2 duration-200 ease-in-out hover:bg-opacity-50 hover:scale-105 lg:inline-block lg:mt-0 hover:text-black">{navItem.name}</a></Link>
+                            <Link key={navItem.name} href={navItem.url}><a className="block px-4 py-2 mt-4 mr-2 duration-200 ease-in-out hover:bg-opacity-50 hover:scale-105 lg:inline-block lg:mt-0">{navItem.name}</a></Link>
                         )
                     })}
                 </div>
