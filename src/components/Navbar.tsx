@@ -29,7 +29,6 @@ export default function Navbar() {
     const [expanded, setExpanded] = useState("hidden");
     const [scrollY, setScrollY] = useState(0);
     const [bg, setBG] = useState("bg-white h-screen");
-    
     useEffect(()=> {
         const handleScroll = () => {
             setScrollY(window.scrollY);
@@ -56,7 +55,7 @@ export default function Navbar() {
                     <span className="text-xl font-semibold tracking-tight duration-300 ease-in-out hover:scale-110"><Link href="/"><a>GALLERAI</a></Link></span>
                 </div>
                 <div className="block lg:hidden" onClick={() => setExpanded(expanded === "hidden"? "": "hidden")}>
-                    <button id="nav" className="flex items-center px-3 py-2 border-2 rounded border-inherit">
+                    <button id="nav" className={"flex items-center px-3 py-2 border-2 rounded " + ((scrollY > 1)? "border-white": "border-black")}>
                     <svg className="w-3 h-3 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title>
                         <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
                     </svg>
@@ -72,7 +71,7 @@ export default function Navbar() {
                     })}
                 </div>
                 <div className="relative mx-auto text-gray-600 lg:block">
-                    <input className="h-10 pl-4 pr-8 text-sm bg-transparent border-none focus:outline-none focus:ring-black focus:ring-2 focus:rounded-full focus:text-black" type="search" name="search" placeholder="Search" />
+                    <input className={"h-10 pl-4 pr-8 text-sm bg-transparent border-none focus:outline-none focus:ring-black focus:ring-2 focus:rounded-full " + ((scrollY > 1)? "focus:text-white": "focus:text-black")} type="search" name="search" placeholder="Search" />
                     <button type="submit" className="absolute top-0 right-0 mt-3 mr-2">
                     <svg className="w-4 h-4 text-gray-600 fill-current" xmlns="http://www.w3.org/2000/svg" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 56.966 56.966"  xmlSpace="preserve" width="512px" height="512px">
                         <path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" />
