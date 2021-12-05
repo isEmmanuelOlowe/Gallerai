@@ -55,16 +55,9 @@ export async function getStaticProps({ params, preview = false}: any) {
 
 export async function getStaticPaths() {
   // const allPosts = await getAllPostsWithSlug()
-  const articles = [
-    {
-      slug: "yah",
-    },
-    {
-      slug: "okay",
-    }
-  ]
+  const keys: string[] = Object.keys(await getPages());
   return {
-    paths: articles.map((node ) => `/article/${node.slug}`) || [],
+    paths: keys.map((key) => `/article/${key}`) || [],
     fallback: true,
   }
 }
