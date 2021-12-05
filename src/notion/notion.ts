@@ -44,9 +44,9 @@ export interface IPage {
   from?: number,
   to?: number,
   // related pages
-  related: string[],
+  related?: string[],
   // sources
-  sources: string[]
+  sources?: string[]
   // page content
   content: IContent[],
 }
