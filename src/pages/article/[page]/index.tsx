@@ -19,7 +19,7 @@ export default function Article({article}: IProps) {
 
   return(
     <>
-    <div style={{"backgroundImage": `url(${article.cover})`}} className='h-full bg-fixed bg-blue-500'>
+    <div style={{"backgroundImage": `url(${article.cover? article.cover: ""})`}} className='h-full bg-fixed bg-blue-500'>
       <Navbar/>
       <Seo/>
       <div className='flex w-screen place-content-center'>
