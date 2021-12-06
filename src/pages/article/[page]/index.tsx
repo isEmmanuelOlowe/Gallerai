@@ -19,19 +19,25 @@ export default function Article({article}: IProps) {
 
   return(
     <>
-    <div className='h-full bg-blue-500'>
-      <Seo/>
+    <div style={{"backgroundImage": `url(${article.cover})`}} className='h-full bg-fixed bg-blue-500'>
       <Navbar/>
+      <Seo/>
       <div className='flex w-screen place-content-center'>
         <div className='w-11/12 h-screen p-20 mt-32 bg-white md:w-5/6'>
           <div className='text-center'>
             <h1>{article? article.title: "Loading..."}</h1>
           </div>
-          <div className='flex text-gray-600'>
-          
+          <div className='flex pt-5 text-gray-600 place-content-center'>
+            {article?.tags && article.tags.map(tag => {
+              return (<div className='p-5 text-yellow-400 border-b-2' key={tag}>{tag} </div>)
+            })}
           </div>
-          <div>
-            
+          <div className='pt-20 xl:p-40'>
+            {
+              article.content.map(content => {
+                return (<div key={content}><p>{content}</p></div>)
+              })
+            }
           </div>
         </div>
       </div>
