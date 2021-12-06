@@ -23,7 +23,7 @@ export default function Article({article}: IProps) {
       <Navbar/>
       <Seo/>
       <div className='flex place-content-center'>
-        <div className='w-11/12 h-screen p-20 mt-32 bg-white md:w-5/6'>
+        <div className='w-11/12 h-screen p-10 mt-32 bg-white md:p-20 md:w-5/6'>
           <div className='text-center'>
             <h1>{article? article.title: "Loading..."}</h1>
           </div>
