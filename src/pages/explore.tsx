@@ -66,5 +66,6 @@ export async function getStaticProps() {
       pages,
       tags,
     },
+    revalidate: 60,
   }
 }
