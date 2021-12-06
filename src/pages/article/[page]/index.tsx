@@ -35,9 +35,7 @@ export default function Article({article}: IProps) {
           <div className='pt-20 xl:p-40'>
             {
               article? article.content.map(content => {
-                if (content != null) {
-                  return (<div key={content}><p>{content}</p></div>)
-                }
+                  return (<div key={content.content}><p>{content.content}</p></div>)
               })
             : <></>}
           </div>

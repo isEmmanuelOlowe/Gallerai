@@ -83,7 +83,7 @@ async function getPageData(data_json:any): Promise<IPages> {
    
     const content: any = blocks["results"];
     for (let i = 0; i < content.length; i++) {
-      pageData.content.push(content[i]["paragraph"]["text"][0]["plain_text"]);
+      pageData.content.push({"type": "text", "content":content[i]["paragraph"]["text"][0]["plain_text"]});
     }
     pages[cleanString(pageData.title)] = pageData;
   }
