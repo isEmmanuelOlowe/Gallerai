@@ -34,12 +34,12 @@ export default function Article({article}: IProps) {
           </div>
           <div className='pt-20 xl:p-40'>
             {
-              article.content.map(content => {
+              article? article.content.map(content => {
                 if (content === null) {
                   return (<div key={content}><p>{content}</p></div>)
                 }
               })
-            }
+            : <></>}
           </div>
         </div>
       </div>
