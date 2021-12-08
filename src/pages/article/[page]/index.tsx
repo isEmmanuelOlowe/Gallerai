@@ -60,7 +60,7 @@ export async function getStaticProps({ params, preview = false}: any) {
       article,
       // posts: data.posts,
     },
-    revalidate: 2,
+    revalidate: 1,
   }
 }
 
