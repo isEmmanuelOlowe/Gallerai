@@ -1,5 +1,5 @@
 import { Client } from '@notionhq/client';
-import { GetDatabaseResponse, QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints';
+// import { GetDatabaseResponse, QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints';
 const databaseID = "da0e007fc1a44318ad65821a02f17f8b";
 const sourcesID = "2ea15fb73628449a8c53f0365cd5b9e1";
 

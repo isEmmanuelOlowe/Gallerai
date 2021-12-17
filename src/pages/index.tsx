@@ -3,7 +3,7 @@ import * as React from 'react';
 
 // import UnstyledLink from '@/components/links/UnstyledLink';
 // import ButtonLink from '@/components/links/ButtonLink';
-import UnstyledLink from '@/components/links/UnstyledLink';
+import UnstyledLink from '@/components/Navigation/links/UnstyledLink';
 import Navbar from '@/components/Navigation/Navbar';
 import Seo from '@/components/Seo';
 

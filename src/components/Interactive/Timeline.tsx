@@ -1,4 +1,3 @@
-import Seo from "../Seo";
 
 export default function Timeline() {
   const date = dateRange(1700, 1820, 10);
