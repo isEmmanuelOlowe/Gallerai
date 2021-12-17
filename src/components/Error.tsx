@@ -1,19 +1,36 @@
-import Navbar from "./Navbar";
-import Seo from "./Seo";
+import { RiAlarmWarningFill } from "react-icons/ri";
 
-export default function Error() {
+import CustomLink from "@/components/Navigation/links/CustomLink";
+import Navbar from "@/components/Navigation/Navbar";
+import Seo from "@/components/Seo"
+
+interface props {
+  error: string
+  seo?: string
+}
+
+export default function Error({error, seo}: props) {
 
   return(
     <>
-    <div className="h-screen">
-    <Navbar/>
-    <Seo/>
-      <div className="flex items-center w-screen h-5/6">
-        <div className="flex content-center w-screen place-content-center">
-            <h1 className="p-5 border-2 border-blue-500 rounded-full">Opps! Page not found</h1>
-        </div>
-      </div>
-    </div>
+      <Seo templateTitle={`${seo? seo: error}`} />
+
+      <main>
+      
+        <section className='h-screen bg-dark'>
+          <Navbar textColour='text-white'/>
+          <div className='flex flex-col items-center justify-center text-center text-white h-[90vh] layout'>
+            <RiAlarmWarningFill
+              size={60}
+              className='text-yellow-300 animate-flicker drop-shadow-glow'
+            />
+            <h1 className='mt-8'>{error}</h1>
+            <CustomLink className='mt-4' href='/'>
+              Back to Home
+            </CustomLink>
+          </div>
+        </section>
+      </main>
     </>
   )
 }

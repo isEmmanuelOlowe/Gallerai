@@ -2,7 +2,7 @@ import { GetStaticPaths, GetStaticProps } from 'next'
 import { useRouter } from "next/router";
 
 import Error from '@/components/Error';
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/Navigation/Navbar";
 import Seo from "@/components/Seo";
 
 import { getPages, IPage, IPages } from '@/notion/notion';
@@ -14,7 +14,7 @@ export default function Article({article}: IProps) {
   const router = useRouter();
 
   if (!router.isFallback && !article?.title) {
-    return <Error/>
+    return <Error error="Page Not Found"/>
   }
 
   return(
@@ -60,7 +60,7 @@ export async function getStaticProps({ params, preview = false}: any) {
       article,
       // posts: data.posts,
     },
-    revalidate: 1,
+  revalidate: 1,
   }
 }
 

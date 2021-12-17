@@ -5,7 +5,7 @@ import { useState } from "react";
 import { DataContext } from "@/data/AppData";
 
 import Card from "@/components/card";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/Navigation/Navbar";
 import Tag from '@/components/Tag'
 
 import { getPages, getTags, IPages, ITag} from "@/notion/notion";

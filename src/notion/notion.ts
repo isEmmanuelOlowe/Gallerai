@@ -1,5 +1,8 @@
 import { Client } from '@notionhq/client';
+import { GetDatabaseResponse, QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints';
 const databaseID = "da0e007fc1a44318ad65821a02f17f8b";
+const sourcesID = "2ea15fb73628449a8c53f0365cd5b9e1";
+
 const notion = new Client({auth: process.env.TOKEN});
 
 export interface IPages {
@@ -22,10 +25,11 @@ export interface IContent {
 }
 
 export interface ISource {
+  id: string,
   type: string,
   name: string
-  content: IContent[],
-  authors: string[],
+  content?: IContent[],
+  authors?: string[],
   isbn?: string,
   publisher: string,
   year: number,
@@ -55,6 +59,28 @@ export async function getTags(): Promise<ITag[]> {
   const response: any = await notion.databases.retrieve({database_id: databaseID});
   const tags: ITag[] = response["properties"]["Tags"]["multi_select"]["options"];
   return tags;
+}
+
+export async function getSources(): Promise<ISources> {
+  const response = await notion.databases.query({database_id: sourcesID});
+  const sources: ISources = extractSources(response);
+  return sources
+}
+
+function extractSources(response: any): ISources {
+  const sources: ISources = {};
+  for (let i = 0; i < response.results.length; i++) {
+    const source: ISource = {
+      id: response.results[i].id,
+      name: response.results[i].properties["Name"]["title"][0]["plain_text"],
+      type: response.results[i].properties["Type"]["select"]["name"],
+      publisher: response.results[i].properties["Publisher"]["select"]["name"],
+      year: response.results[i].properties["Publishing/Release Date"]["number"],
+      url: response.results[i].properties["Link"]["url"],
+    }
+    sources[cleanString(source.name)] = source;
+  }
+  return sources
 }
 
 export async function getPages(): Promise<IPages> {
