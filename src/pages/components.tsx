@@ -1,10 +1,10 @@
 import clsx from 'clsx';
 import * as React from 'react';
 
-import Button from '@/components/buttons/Button';
-import ButtonLink from '@/components/links/ButtonLink';
-import CustomLink from '@/components/links/CustomLink';
-import UnstyledLink from '@/components/links/UnstyledLink';
+import Button from '@/components/Navigation/buttons/Button';
+import ButtonLink from '@/components/Navigation/links/ButtonLink';
+import CustomLink from '@/components/Navigation/links/CustomLink';
+import UnstyledLink from '@/components/Navigation/links/UnstyledLink';
 import Seo from '@/components/Seo';
 
 export default function ComponentsPage() {
