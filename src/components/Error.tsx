@@ -17,7 +17,7 @@ export default function Error({error, seo}: props) {
 
       <main>
       
-        <section className='h-screen bg-dark'>
+        <section className='h-screen bg-base-content'>
           <Navbar textColour='text-white'/>
           <div className='flex flex-col items-center justify-center text-center text-white h-[90vh] layout'>
             <RiAlarmWarningFill
