@@ -27,7 +27,8 @@ export interface IContent {
 export interface ISource {
   id: string,
   type: string,
-  name: string
+  name: string,
+  cover?: string,
   content?: IContent[],
   authors?: string[],
   isbn?: string,

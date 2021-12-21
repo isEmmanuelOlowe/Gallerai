@@ -19,7 +19,7 @@ export default function Sources({sources}: props) {
       <Navbar/>
       <div className="flex flex-wrap justify-center">
       {Object.entries(sources).map(([key, page]) => {
-        return(<Link key={key} href={`/sources/${key}`}><a className='w-3/4 m-5 text-white bg-dark lg:w-1/3'><SourceCard source={page}/></a></Link>)
+        return(<SourceCard source={page}/>)
       })}
       </div>
     </>

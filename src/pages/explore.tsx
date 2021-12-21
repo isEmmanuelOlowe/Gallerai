@@ -29,32 +29,33 @@ export default function Explore ({pages, tags}: props) {
   }
   
     return(
-      <>
-      <Navbar/>
-      <div className="flex flex-wrap justify-center">
-        {tags.map(tag => {
-          if (selected.includes(tag.name)) {            
-            return (<div key={tag.id} onClick={()=> select(tag.name)}>
-                <Tag key={tag.id} tag={tag} selected={true}/>
-              </div>)
+    <div className="min-h-screen">
+      <div className="">
+        <Navbar/>
+        <div className="flex flex-wrap justify-center">
+          {tags.map(tag => {
+            if (selected.includes(tag.name)) {            
+              return (<div key={tag.id} onClick={()=> select(tag.name)}>
+                  <Tag key={tag.id} tag={tag} selected={true}/>
+                </div>)
+              }
+            else {
+              return (<div key={tag.id} onClick={()=> select(tag.name)}>
+                  <Tag key={tag.id} tag={tag} selected={false}/>
+                </div>)
             }
-          else {
-            return (<div key={tag.id} onClick={()=> select(tag.name)}>
-                <Tag key={tag.id} tag={tag} selected={false}/>
-              </div>)
+            })
           }
-          })
-        }
+        </div>
+        <div className="flex flex-wrap justify-center">
+          {Object.entries(pages).map(([key, page]) => {
+            if (selected.every(tag => page.tags.includes(tag))) {
+              return (<Card key={key} page={page}/>)
+            }
+          })}
+        </div>
+        </div>
       </div>
-      <div className="flex flex-wrap justify-center">
-        {Object.entries(pages).map(([key, page]) => {
-          if (selected.every(tag => page.tags.includes(tag))) {
-            return (<Card key={key} page={page}/>)
-          }
-        })}
-      </div>
-
-      </>
     )
 }
 

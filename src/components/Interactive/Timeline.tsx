@@ -5,10 +5,7 @@ export default function Timeline() {
   
   return (
     <div>
-      <div className="w-[100vw]">
-        <div className="h-[60vh]">
-
-        </div>
+      <div className="w-[200vw]">
         <div className="pl-20 pr-20 bg-red-500">
           <div className="flex">
             <div>

@@ -14,7 +14,7 @@ class MyDocument extends Document {
 
   render() {
     return (
-      <Html lang='en'>
+      <Html lang='en' data-theme="retro">
         <Head>
           <link
             rel='preload'
