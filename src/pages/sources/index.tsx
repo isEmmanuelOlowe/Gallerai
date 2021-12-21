@@ -19,7 +19,7 @@ export default function Sources({sources}: props) {
       <Navbar/>
       <div className="flex flex-wrap justify-center">
       {Object.entries(sources).map(([key, page]) => {
-        return(<SourceCard source={page}/>)
+        return(<SourceCard key={key} url={key} source={page}/>)
       })}
       </div>
     </>
