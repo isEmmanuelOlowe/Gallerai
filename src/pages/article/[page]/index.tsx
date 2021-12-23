@@ -23,7 +23,7 @@ export default function Article({article}: IProps) {
       <div style={{"backgroundImage": `url(${article? article.cover: ""})`}} className='h-full bg-fixed'>
         <div className='bg-white bg-opacity-5 backdrop-filter backdrop-blur-sm'>
             <Navbar/>
-            <Seo/>
+            <Seo templateTitle={article? article.title: ""}/>
             <div className='flex place-content-center'>
               <div className='w-11/12 h-screen p-10 mt-32 bg-neutral-content md:p-20 md:w-5/6'>
                 <div className='text-center'>

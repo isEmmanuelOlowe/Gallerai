@@ -4,6 +4,7 @@ import { useState } from "react";
 
 import { DataContext } from "@/data/AppData";
 
+import Seo from "@/components/Seo";
 import Card from "@/components/card";
 import Navbar from "@/components/Navigation/Navbar";
 import Tag from '@/components/Tag'
@@ -32,6 +33,7 @@ export default function Explore ({pages, tags}: props) {
     <div className="min-h-screen">
       <div className="">
         <Navbar/>
+        <Seo/>
         <div className="flex flex-wrap justify-center">
           {tags.map(tag => {
             if (selected.includes(tag.name)) {            

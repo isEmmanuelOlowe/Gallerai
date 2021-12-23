@@ -36,7 +36,7 @@ export default function Seo(props: SeoProps) {
 
   return (
     <Head>
-      <title>{props.templateTitle? props.templateTitle : meta.title}</title>
+      <title>{props.templateTitle? props.templateTitle + " : GALLERAI" : meta.title}</title>
       <meta name='robots' content={meta.robots} />
       <meta content={meta.description} name='description' />
       <meta property='og:url' content={`${meta.url}${router.asPath}`} />
