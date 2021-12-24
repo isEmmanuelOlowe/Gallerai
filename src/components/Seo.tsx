@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { openGraph } from '@/lib/helper';
 
 const defaultMeta = {
-  title: 'Mathematics in Scottish Enlightenment',
+  title: 'Mathematics in the Scottish Enlightenment',
   siteName: 'Gallerai',
   description:
     'A virtual museum of the history of mathematics in the scottish enlightenment',
