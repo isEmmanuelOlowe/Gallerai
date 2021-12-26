@@ -5,7 +5,7 @@ import Error from '@/components/Error';
 import Navbar from "@/components/Navigation/Navbar";
 import Seo from "@/components/Seo";
 
-import { getPages, IPage, IPages } from '@/notion/notion';
+import { getPages, IPage, IPages, getPageContent } from '@/notion/notion';
 
 interface IProps {
   article: IPage
@@ -54,6 +54,7 @@ export async function getStaticProps({ params, preview = false}: any) {
   // const data = await getPostAndMorePosts(params.slug, preview, previewData)
   const articles: IPages = await getPages()
   const article: IPage = articles[params.page];
+  article.content = await getPageContent(article.id);
   return {
     props: {
       preview,

@@ -103,15 +103,6 @@ async function getPageData(data_json:any): Promise<IPages> {
       content: [],
     }
     pageData.tags = stripTags(page["properties"]["Tags"]["multi_select"]);
-    const blocks = await notion.blocks.children.list({
-      block_id: page["id"],
-      page_size: 50,
-    });
-   
-    const content: any = blocks["results"];
-    for (let i = 0; i < content.length; i++) {
-      pageData.content.push({"type": "text", "content":content[i]["paragraph"]["text"][0]["plain_text"]});
-    }
     pages[cleanString(pageData.title)] = pageData;
   }
   return pages
@@ -134,6 +125,35 @@ function getCover(page: any): string | null {
   }
 }
 
+export async function getPageContent(id: string): Promise<IContent[]> {
+  const content: IContent[] = [];
+
+  const blocks = await notion.blocks.children.list({
+    block_id: id,
+    page_size: 50,
+  });
+
+  for (let i = 0; i < blocks["results"].length; i++) {
+    content.push(addBlock(blocks["results"][i]));
+  }
+
+  return content
+}
+
+function addBlock(blockType: any): IContent{
+    let content: IContent;
+    switch(blockType["type"]) {
+      default:
+        content =  {"type":"text", "content": blockType["paragraph"]["text"]["0"]["plain_text"]}
+    }
+    return content
+}
+
+/**
+ * Removes characters which can not be present in URL
+ * @param text the string being to be cleaned
+ * @returns the cleaned string
+ */
 function cleanString(text: string): string {
   return(text.replace("/[/.?=&:#]+/g", ""))
 }

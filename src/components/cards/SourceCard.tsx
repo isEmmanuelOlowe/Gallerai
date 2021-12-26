@@ -9,7 +9,7 @@ export default function SourceCard({url, source}: props) {
 
   return (
       <>
-      <Link key={url} href={`/sources/${url}`}><a className='w-3/4 m-5 text-white card bordered bg-base-content lg:w-1/3'>
+      <Link key={url} href={`/sources/${url}`}><a className='w-full m-5 text-white card bordered bg-base-content md:w-5/12'>
         <div className="flex content-around justify-center p-2 text-yellow-600">
             <h6 className="p-5">{source.type}</h6>
             <h6 className="p-5">{source.publisher}</h6>

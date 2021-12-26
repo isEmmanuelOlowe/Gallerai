@@ -5,6 +5,7 @@ interface props {
   page: IPage;
 }
 export default function Card ({page}: props) {
+  console.log(page)
   return (
     <Link href={`/article/${encodeURIComponent(page.title)}`} passHref>
       <a className='m-5 shadow-2xl w-96 card'>

@@ -9,7 +9,7 @@ import Card from "@/components/card";
 import Navbar from "@/components/Navigation/Navbar";
 import Tag from '@/components/Tag'
 
-import { getPages, getTags, IPages, ITag} from "@/notion/notion";
+import { getPages, getTags, IPages, IPage, ITag} from "@/notion/notion";
 interface props {
   pages: IPages,
   tags: ITag[]
@@ -29,6 +29,14 @@ export default function Explore ({pages, tags}: props) {
     }
   }
   
+  let articles: IPage[] = []
+  Object.entries(pages).map(([key, page]) => {
+    if (selected.every(tag => page.tags.includes(tag))) {
+      articles.push(page)
+      }
+    })
+
+  console.log(`number of articles: ${articles.length}`);
     return(
     <div className="min-h-screen">
       <div className="">
@@ -50,11 +58,8 @@ export default function Explore ({pages, tags}: props) {
           }
         </div>
         <div className="flex flex-wrap justify-center">
-          {Object.entries(pages).map(([key, page]) => {
-            if (selected.every(tag => page.tags.includes(tag))) {
-              return (<Card key={key} page={page}/>)
-            }
-          })}
+          {articles.length === 0? <h3 className="mt-10 text-base-300">No Overlap of Topics</h3> : 
+          articles.map(article => (<Card key={article.id} page={article}></Card>))}
         </div>
         </div>
       </div>
