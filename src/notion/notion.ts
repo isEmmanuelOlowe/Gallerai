@@ -3,6 +3,7 @@ import { Client } from '@notionhq/client';
 const databaseID = "da0e007fc1a44318ad65821a02f17f8b";
 const sourcesID = "2ea15fb73628449a8c53f0365cd5b9e1";
 
+// Notion client for connecting with notion database
 const notion = new Client({auth: process.env.TOKEN});
 
 export interface IPages {
@@ -56,18 +57,31 @@ export interface IPage {
   content: IContent[],
 }
 
+/**
+ * Extracts all the tags which are used by the notion database for content
+ * @returns the tags being used by the notion database
+ */
 export async function getTags(): Promise<ITag[]> {
   const response: any = await notion.databases.retrieve({database_id: databaseID});
   const tags: ITag[] = response["properties"]["Tags"]["multi_select"]["options"];
   return tags;
 }
 
+/**
+ * Extracts all the sources used from notion database
+ * @returns all the sources used
+ */
 export async function getSources(): Promise<ISources> {
   const response = await notion.databases.query({database_id: sourcesID});
   const sources: ISources = extractSources(response);
   return sources
 }
 
+/**
+ * Processes the sources used from the url response data
+ * @param response the url response data
+ * @returns the sources in a object format
+ */
 function extractSources(response: any): ISources {
   const sources: ISources = {};
   for (let i = 0; i < response.results.length; i++) {
@@ -84,11 +98,20 @@ function extractSources(response: any): ISources {
   return sources
 }
 
+/**
+ * Gets all the sources from notion database
+ * @returns a list of source objects
+ */
 export async function getPages(): Promise<IPages> {
   const response = await notion.databases.query({ database_id: databaseID });
   return await getPageData(response);
 }
 
+/**
+ * Extracts the pages from the notion database of pages
+ * @param data_json the response data
+ * @returns the list of page objects
+ */
 async function getPageData(data_json:any): Promise<IPages> {
 
   const pages: IPages = {};
@@ -108,6 +131,11 @@ async function getPageData(data_json:any): Promise<IPages> {
   return pages
 }
 
+/**
+ * Extracts all the names of tags from Tag object
+ * @param tags the page objects being extracted
+ * @returns the tag objects
+ */
 function stripTags(tags: ITag[]): string[] {
   const tagArray: string[] = []
   for (let i = 0; i < tags.length; i++) {
@@ -116,6 +144,11 @@ function stripTags(tags: ITag[]): string[] {
   return tagArray
 }
 
+/**
+ * Extracts the cover of a page from the response data if cover exists
+ * @param page The page data
+ * @returns URL of the page cover if it exists
+ */
 function getCover(page: any): string | null {
   if (!(page["properties"]["Cover Image"]["files"].length === 0)) {
     return(page["properties"]["Cover Image"]["files"][0]["file"]["url"])
@@ -125,6 +158,11 @@ function getCover(page: any): string | null {
   }
 }
 
+/**
+ * Gets all the content on a Page from Notion
+ * @param id the ID of the page
+ * @returns a list of all the content on the page
+ */
 export async function getPageContent(id: string): Promise<IContent[]> {
   const content: IContent[] = [];
 
@@ -140,6 +178,11 @@ export async function getPageContent(id: string): Promise<IContent[]> {
   return content
 }
 
+/**
+ * Adds a determines the type of content a given block stores
+ * @param blockType the block of content being extracted and type determined
+ * @returns an object with the extract content and its type
+ */
 function addBlock(blockType: any): IContent{
     let content: IContent;
     switch(blockType["type"]) {
