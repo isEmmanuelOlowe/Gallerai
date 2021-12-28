@@ -151,6 +151,11 @@ function stripTags(tags: ITag[]): string[] {
  */
 function getCover(page: any): string | null {
   if (!(page["properties"]["Cover Image"]["files"].length === 0)) {
+    // Extracts images from external sites
+    if (page["properties"]["Cover Image"]["files"][0]["type"] === "external") {
+      return(page["properties"]["Cover Image"]["files"][0]["external"]["url"])
+    }
+    // Extracts images from the notion api
     return(page["properties"]["Cover Image"]["files"][0]["file"]["url"])
   }
   else {
