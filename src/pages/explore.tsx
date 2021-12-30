@@ -36,7 +36,6 @@ export default function Explore ({pages, tags}: props) {
       }
     })
 
-  console.log(`number of articles: ${articles.length}`);
     return(
     <div className="min-h-screen">
       <div className="">
