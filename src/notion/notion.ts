@@ -89,7 +89,7 @@ function extractSources(response: any): ISources {
       id: response.results[i].id,
       name: response.results[i].properties["Name"]["title"][0]["plain_text"],
       type: response.results[i].properties["Type"]["select"]["name"],
-      publisher: response.results[i].properties["Publisher"]["select"]["name"],
+      publisher: response.results[i].properties["Publisher"]["select"]? response.results[i].properties["Publisher"]["select"]["name"]:null,
       year: response.results[i].properties["Publishing/Release Date"]["number"],
       url: response.results[i].properties["Link"]["url"],
     }
