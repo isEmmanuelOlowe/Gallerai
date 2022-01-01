@@ -1,8 +1,4 @@
-import { getPage } from "@notionhq/client/build/src/api-endpoints";
-import { useRouter } from "next/router";
 import { useState } from "react";
-
-import { DataContext } from "@/data/AppData";
 
 import Card from "@/components/card";
 import Navbar from "@/components/Navigation/Navbar";
