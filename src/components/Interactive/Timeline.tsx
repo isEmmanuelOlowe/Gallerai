@@ -6,7 +6,7 @@ export default function Timeline() {
   return (
     <div>
       <div className="w-[200vw]">
-        <div className="pl-20 pr-20 bg-red-500">
+        <div className="block w-full pl-20 pr-20 bg-red-500">
           <div className="flex">
             <div>
               <h6 className="p-1 mr-10 text-center bg-yellow-600 rounded-b-2xl">Before the Enlgihtenment</h6>
@@ -24,7 +24,7 @@ export default function Timeline() {
           <div className="flex align-bottom" style={{"marginLeft": "10.7rem"}}>
             {
               space.map((space) => (
-                <div key={space} style={{"borderLeft": `${(space % 5 == 0)? "4px": "2px"} solid black`, "height": `${(space % 5 == 0)? "1.5rem": "1rem"}`, "width": "1.45rem"}}></div>
+                <div key={space} style={{"borderLeft": `${(space % 5 == 0)? "4px": "2px"} solid black`, "height": `${(space % 5 == 0)? "1.5rem": "1rem"}`, "width": "1.45wv"}}></div>
               ))
             }
           </div>
