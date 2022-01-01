@@ -1,5 +1,6 @@
-import { ISource } from "@/notion/notion";
 import Link from 'next/link';
+
+import { ISource } from "@/notion/notion";
 interface props {
   url: string,
   source: ISource
@@ -7,6 +8,7 @@ interface props {
 
 export default function SourceCard({url, source}: props) {
 
+  if (!source) {return <p>Loading...</p>}
   return (
       <>
       <Link key={url} href={`/sources/${url}`}><a className='w-full m-5 text-white card bordered bg-base-content md:w-5/12'>
