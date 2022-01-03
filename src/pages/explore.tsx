@@ -1,15 +1,11 @@
-import { getPage } from "@notionhq/client/build/src/api-endpoints";
-import { useRouter } from "next/router";
 import { useState } from "react";
 
-import { DataContext } from "@/data/AppData";
-
-import Seo from "@/components/Seo";
 import Card from "@/components/card";
 import Navbar from "@/components/Navigation/Navbar";
+import Seo from "@/components/Seo";
 import Tag from '@/components/Tag'
 
-import { getPages, getTags, IPages, IPage, ITag} from "@/notion/notion";
+import { getPages, getTags, IPage, IPages, ITag} from "@/notion/notion";
 interface props {
   pages: IPages,
   tags: ITag[]
@@ -29,7 +25,7 @@ export default function Explore ({pages, tags}: props) {
     }
   }
   
-  let articles: IPage[] = []
+  const articles: IPage[] = []
   Object.entries(pages).map(([key, page]) => {
     if (selected.every(tag => page.tags.includes(tag))) {
       articles.push(page)
