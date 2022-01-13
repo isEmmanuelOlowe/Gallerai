@@ -44,7 +44,7 @@ export default function Article({article, sources}: IProps) {
                     })
                   : <></>}
                 </div>
-                <SourceSection sources={sources}/>
+                { article? <SourceSection sources={sources}/>:<></>}
               </div>
             </div>
     
@@ -77,6 +77,6 @@ export async function getStaticPaths() {
   const keys: string[] = Object.keys(await getPages());
   return {
     paths: keys.map((key) => `/article/${key}`) || [],
-    fallback: false,
+    fallback: true,
   }
 }

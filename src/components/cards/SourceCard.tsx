@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 import { ISource } from "@/notion/notion";
-import Sources from '@/pages/sources';
+
 interface props {
   url: string,
   source: ISource
