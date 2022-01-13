@@ -1,12 +1,14 @@
 import Link from 'next/link';
 
 import { ISource } from "@/notion/notion";
+import Sources from '@/pages/sources';
 interface props {
   url: string,
   source: ISource
 }
 
 export default function SourceCard({url, source}: props) {
+
   return (
       <>
       <Link key={url} href={`/sources/${url}`}><a className='w-full m-5 text-white card bordered bg-base-content md:w-5/12'>
@@ -17,7 +19,7 @@ export default function SourceCard({url, source}: props) {
         </div>
         {/* <div className="h-48" style={{"backgroundImage": `url(${source.cover})`}}/> */}
         <div className="card-body">
-          <h2 className="card-title">{source.name}</h2> 
+          <h2 className="text-center card-title">{source.name}</h2>
         </div>
         </a>
       </Link>

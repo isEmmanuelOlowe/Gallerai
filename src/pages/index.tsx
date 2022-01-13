@@ -12,8 +12,17 @@ export default function HomePage() {
         <div className='h-full bg-gradient-to-b from-base-100 via-base-100 to-transparent'>
           <Navbar/>
           <Seo/>
-          <main>
-            
+          <main className='content-center justify-center w-full mt-24 text-center'>
+            <h1 className='text-5xl'>Mathematics in the Scottish Enlightenment</h1>
+            <p>
+              Explore the world of Mathematics in the Period of Scotland between 1720-1820
+            </p>
+            <div className="mt-16 divider"><h2>Guides</h2></div> 
+            <p>View Guides of different stories why tell you more about Mathematics in the Enlightenment</p>
+
+            <div className="mt-16 divider"><h2>Interactive Exhibits</h2></div> 
+            <p>Check out some interactive exihits</p>
+
           </main>
         </div>
       </div>

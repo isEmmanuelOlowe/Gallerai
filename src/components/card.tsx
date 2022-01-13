@@ -8,11 +8,10 @@ export default function Card ({page}: props) {
   return (
     <Link href={`/article/${encodeURIComponent(page.title)}`} passHref>
       <a className='m-5 shadow-2xl w-96 card'>
-          <div style={{"backgroundImage":`url(${page.cover})`}} className='h-64 bg-top bg-cover bg-base-300'>
-
+          <div style={{"backgroundImage":`url(${page.cover})`}} className='bg-top bg-cover h-96 bg-base-300 duration-200 ease-in-out hover:scale-[1.15]'>
+          <div className="absolute bottom-0 w-full text-white card-body">
+            <h2 className="card-title shadow-xl bg-neutral p-2 bg-opacity-50 hover:bg-opacity-90">{page.title}</h2> 
           </div>
-          <div className="text-white bg-black bg-opacity-75 card-body">
-            <h2 className="card-title">{page.title}</h2> 
           </div>
       </a>
     </Link>

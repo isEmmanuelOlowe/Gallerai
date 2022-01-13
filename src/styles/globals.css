@@ -69,8 +69,9 @@
 
 @layer utilities {
   .animated-underline {
+    padding-bottom: 5px;
     background-image: linear-gradient(#33333300, #33333300),
-      linear-gradient(to right, var(--clr-primary-400), var(--clr-primary-500));
+      linear-gradient(to right, black, black);
     background-size: 100% 2px, 0 2px;
     background-position: 100% 100%, 0 100%;
     background-repeat: no-repeat;

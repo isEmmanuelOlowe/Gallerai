@@ -2,7 +2,7 @@ import { Client } from '@notionhq/client';
 // import { GetDatabaseResponse, QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints';
 const databaseID = "da0e007fc1a44318ad65821a02f17f8b";
 const sourcesID = "2ea15fb73628449a8c53f0365cd5b9e1";
-
+const guidesID = "4fdaf76c73cb451f996defcb61f90b94";
 // Notion client for connecting with notion database
 const notion = new Client({auth: process.env.TOKEN});
 
@@ -52,7 +52,7 @@ export interface IPage {
   // related pages
   related?: string[],
   // sources
-  sources?: string[]
+  sources: string[]
   // page content
   content: IContent[],
 }
@@ -98,6 +98,17 @@ function extractSources(response: any): ISources {
   return sources
 }
 
+export async function getPageSources(sourceIDs: string[]): Promise<ISource[]> {
+  const sources: ISource[] = [];
+  const databaseSources: ISources = await getSources();
+  for (const key in databaseSources) {
+    if (sourceIDs.includes(databaseSources[key].id)) {
+      sources.push(databaseSources[key]);
+    } 
+  }
+  return sources;
+}
+
 /**
  * Gets all the sources from notion database
  * @returns a list of source objects
@@ -124,6 +135,7 @@ async function getPageData(data_json:any): Promise<IPages> {
       cover: getCover(page),
       tags: [],
       content: [],
+      sources: getPageSourceIDs(page["properties"]["Sources"]["relation"]),
     }
     pageData.tags = stripTags(page["properties"]["Tags"]["multi_select"]);
     pages[cleanString(pageData.title)] = pageData;
@@ -191,8 +203,19 @@ export async function getPageContent(id: string): Promise<IContent[]> {
 function addBlock(blockType: any): IContent{
     let content: IContent;
     switch(blockType["type"]) {
+      case "heading_1":
+        content = {"type": "heading_1", "content": blockType["heading_1"]["text"][0]["text"]["content"]}
+        break;
+      case "heading_2":
+        content = {"type": "heading_2", "content": blockType["heading_2"]["text"][0]["text"]["content"]}
+        break;
       default:
-        content =  {"type":"text", "content": blockType["paragraph"]["text"]["0"]["plain_text"]}
+        if (blockType["paragraph"]["text"]["0"] === undefined) {
+          content = {"type":"break", "content": ""};
+        }
+        else {
+          content =  {"type":"text", "content": blockType["paragraph"]["text"]["0"]["text"]["content"]}
+        }
     }
     return content
 }
@@ -204,4 +227,18 @@ function addBlock(blockType: any): IContent{
  */
 function cleanString(text: string): string {
   return(text.replace("/[/.?=&:#]+/g", ""))
+}
+
+
+/**
+ * Extracts the source page ids from a call of the notion API
+ * @param SourceData the JSON object containing data about Source Page IDs
+ * @returns a list of the source page IDs of this page
+ */
+function getPageSourceIDs(SourceData: any): string[] {
+  const sources: string[] = [];
+  for (let i =0; i < SourceData.length; i++) {
+    sources.push(SourceData[i].id);
+  }
+  return sources;
 }

@@ -3,14 +3,17 @@ import { useRouter } from "next/router";
 
 import Error from '@/components/Error';
 import Navbar from "@/components/Navigation/Navbar";
+import Content from '@/components/section/Content';
+import SourceSection from '@/components/section/SourceSection';
 import Seo from "@/components/Seo";
 
-import { getPages, IPage, IPages, getPageContent } from '@/notion/notion';
+import { getPageContent,getPages, getPageSources, IPage, IPages, ISource } from '@/notion/notion';
 
 interface IProps {
-  article: IPage
+  article: IPage,
+  sources: ISource[]
 }
-export default function Article({article}: IProps) {
+export default function Article({article, sources}: IProps) {
   const router = useRouter();
 
   if (!router.isFallback && !article?.title) {
@@ -36,13 +39,15 @@ export default function Article({article}: IProps) {
                 </div>
                 <div className='pt-20 xl:p-40'>
                   {
-                    article? article.content.map(content => {
-                        return (<div key={content.content}><p>{content.content}</p></div>)
+                    article? article.content.map(function(content, index) {
+                        return (<Content key={index} content={content}/>)
                     })
                   : <></>}
                 </div>
+                <SourceSection sources={sources}/>
               </div>
             </div>
+    
         </div>
       </div>
       </div>
@@ -55,10 +60,12 @@ export async function getStaticProps({ params, preview = false}: any) {
   const articles: IPages = await getPages()
   const article: IPage = articles[params.page];
   article.content = await getPageContent(article.id);
+  const sources= await getPageSources(article.sources);
   return {
     props: {
       preview,
       article,
+      sources,
       // posts: data.posts,
     },
   revalidate: 1,
@@ -70,6 +77,6 @@ export async function getStaticPaths() {
   const keys: string[] = Object.keys(await getPages());
   return {
     paths: keys.map((key) => `/article/${key}`) || [],
-    fallback: true,
+    fallback: false,
   }
 }
