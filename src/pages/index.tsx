@@ -17,10 +17,10 @@ export default function HomePage() {
             <p>
               Explore the world of Mathematics in the Period of Scotland between 1720-1820
             </p>
-            <div className="mt-16 divider"><h2>Guides</h2></div> 
+            <div className="mt-16 font-serif divider"><h2>Guides</h2></div> 
             <p>View Guides of different stories why tell you more about Mathematics in the Enlightenment</p>
 
-            <div className="mt-16 divider"><h2>Interactive Exhibits</h2></div> 
+            <div className="mt-16 font-serif divider"><h2>Interactive Exhibits</h2></div> 
             <p>Check out some interactive exihits</p>
 
           </main>
