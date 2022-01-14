@@ -10,7 +10,7 @@ export default function SourceSection({sources}: props) {
     return <></>
   }
   return (
-    <div className="">
+    <div className="mt-32 mb-20 lg:m-0">
       <h2 className="font-serif text-2xl divider">Sources</h2>
       <ul className="list-[square] text-lg text-neutral md:w-1/2 m-auto p-3">
         {sources.map(source => {
