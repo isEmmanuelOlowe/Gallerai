@@ -11,43 +11,37 @@ import Tag from '@/components/Tag';
 import { getPages, getTags, IPage, IPages, ITag} from "@/notion/notion";
 interface props {
   pages: IPages,
-  tags: ITag[]
+  tagNames: ITag[]
 }
 
-export default function Explore ({pages, tags}: props) {
-  const [selected, setSelected] = useState<string[]>([]);
+export default function Explore ({pages, tagNames}: props) {
   const router = useRouter();
-  
-  useEffect(() => {
-    const history = createBrowserHistory();
-    const filterParams = history.location.search.substr(1);
-    const filtersFromParams = qs.parse(filterParams);
-    if (filtersFromParams.tags) {
-      const query = filtersFromParams.tags;
-      if (typeof query === "string") {
-        setSelected(query.split(","));
-      } 
-    }
-  }, []);
+  const {tags} = router.query;
+  const [selected, setSelected] = useState<string[]>([]);
   
   const select = (tagname: string) => {
     if (selected.includes(tagname)) {
-      setSelected(selected.filter(function (tag) {
+      const newSelected = selected.filter(function (tag) {
         return tag !== tagname;
-      }))
+      })
+      setSelected(newSelected);
+      router.push(`/explore?tags=${newSelected}`, undefined, {shallow: true});
     }
     else {
-      setSelected([...selected, tagname])
+      setSelected([...selected, tagname]);
+      router.push(`/explore?tags=${[...selected, tagname]}`, undefined, {shallow: true});
     }
   }
-  
+
   useEffect(() => {
-    router.push(`/explore?tags=${selected}`, undefined, {shallow: true})
-  }, [selected, router]);
+    if (typeof tags === "string" && tags !== '') {
+      setSelected(tags.split(","))
+    }
+  }, [tags])
   
   const articles: IPage[] = []
   Object.entries(pages).map(([key, page]) => {
-    if (selected.every(tag => page.tags.includes(tag))) {
+    if (selected === [] || selected.every(tag => page.tags.includes(tag))) {
       articles.push(page)
       }
     })
@@ -58,7 +52,7 @@ export default function Explore ({pages, tags}: props) {
         <Navbar/>
         <Seo/>
         <div className="flex flex-wrap justify-center">
-          {tags.map(tag => {
+          {tagNames.map(tag => {
             if (selected.includes(tag.name)) {            
               return (<div key={tag.id} onClick={()=> select(tag.name)}>
                   <Tag key={tag.id} tag={tag} selected={true}/>
@@ -83,11 +77,11 @@ export default function Explore ({pages, tags}: props) {
 
 export async function getStaticProps() {
   const pages: IPages = await getPages();
-  const tags: ITag[] = await getTags();
+  const tagNames: ITag[] = await getTags();
   return {
     props: {
       pages,
-      tags,
+      tagNames,
     },
     revalidate: 1,
   }
