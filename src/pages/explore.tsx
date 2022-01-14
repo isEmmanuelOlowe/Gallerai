@@ -1,9 +1,12 @@
-import { useState } from "react";
+// import { useRouter } from 'next/router'
+import { createBrowserHistory } from "history";
+import qs from "qs";
+import { useEffect, useState } from "react";
 
 import Card from "@/components/card";
 import Navbar from "@/components/Navigation/Navbar";
 import Seo from "@/components/Seo";
-import Tag from '@/components/Tag'
+import Tag from '@/components/Tag';
 
 import { getPages, getTags, IPage, IPages, ITag} from "@/notion/notion";
 interface props {
@@ -13,6 +16,15 @@ interface props {
 
 export default function Explore ({pages, tags}: props) {
   const [selected, setSelected] = useState<string[]>([]);
+  
+  useEffect(() => {
+    const history = createBrowserHistory();
+    const filterParams = history.location.search.substr(1);
+    const filtersFromParams = qs.parse(filterParams);
+    if (filtersFromParams.tags) {
+      setSelected(filtersFromParams.tags.split(","));
+    }
+  }, []);
   
   const select = (tagname: string) => {
     if (selected.includes(tagname)) {
@@ -24,6 +36,11 @@ export default function Explore ({pages, tags}: props) {
       setSelected([...selected, tagname])
     }
   }
+  
+  useEffect(() => {
+    const history = createBrowserHistory();
+    history.push(`?tags=${selected}`);
+  }, [selected]);
   
   const articles: IPage[] = []
   Object.entries(pages).map(([key, page]) => {

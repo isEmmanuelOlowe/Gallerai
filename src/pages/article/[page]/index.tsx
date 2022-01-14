@@ -2,6 +2,7 @@ import { GetStaticPaths, GetStaticProps } from 'next'
 import { useRouter } from "next/router";
 
 import Error from '@/components/Error';
+import UnderlineLink from '@/components/Navigation/links/UnderlineLink';
 import Navbar from "@/components/Navigation/Navbar";
 import Content from '@/components/section/Content';
 import SourceSection from '@/components/section/SourceSection';
@@ -28,13 +29,13 @@ export default function Article({article, sources}: IProps) {
             <Navbar/>
             <Seo templateTitle={article? article.title: ""}/>
             <div className='flex place-content-center'>
-              <div className='w-11/12 h-screen p-10 mt-32 bg-neutral-content md:p-20 md:w-5/6'>
-                <div className='text-center'>
-                  <h1>{article? article.title: "Loading..."}</h1>
+              <div className='w-[95%] min-h-screen p-4 mt-32 bg-neutral-content md:p-20 md:w-5/6'>
+                <div className='mt-5 text-center'>
+                  <h1 className='text-4xl'>{article? article.title: "Loading..."}</h1>
                 </div>
-                <div className='flex pt-5 text-gray-600 place-content-center'>
+                <div className='flex flex-wrap pt-5 text-gray-600 place-content-center'>
                   {article?.tags && article.tags.map(tag => {
-                    return (<div className='p-5 text-yellow-900 border-b-2' key={tag}>{tag} </div>)
+                    return (<UnderlineLink className='p-2 m-2 text-accent-content' href={`/explore?tags=${encodeURI(tag)}`} key={tag}>{tag}</UnderlineLink>)
                   })}
                 </div>
                 <div className='pt-20 xl:p-40'>
@@ -51,8 +52,7 @@ export default function Article({article, sources}: IProps) {
         </div>
       </div>
       </div>
-    </>
-  )
+    </>)
 }
 
 export async function getStaticProps({ params, preview = false}: any) {
