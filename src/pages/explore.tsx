@@ -1,5 +1,5 @@
-// import { useRouter } from 'next/router'
 import { createBrowserHistory } from "history";
+import { useRouter } from 'next/router'
 import qs from "qs";
 import { useEffect, useState } from "react";
 
@@ -16,6 +16,7 @@ interface props {
 
 export default function Explore ({pages, tags}: props) {
   const [selected, setSelected] = useState<string[]>([]);
+  const router = useRouter();
   
   useEffect(() => {
     const history = createBrowserHistory();
@@ -41,9 +42,8 @@ export default function Explore ({pages, tags}: props) {
   }
   
   useEffect(() => {
-    const history = createBrowserHistory();
-    history.push(`?tags=${selected}`);
-  }, [selected]);
+    router.push(`/explore?tags=${selected}`)
+  }, [selected, router]);
   
   const articles: IPage[] = []
   Object.entries(pages).map(([key, page]) => {
