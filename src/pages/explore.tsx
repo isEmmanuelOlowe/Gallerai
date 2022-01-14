@@ -42,7 +42,7 @@ export default function Explore ({pages, tags}: props) {
   }
   
   useEffect(() => {
-    router.push(`/explore?tags=${selected}`)
+    router.push(`/explore?tags=${selected}`, undefined, {shallow: true})
   }, [selected, router]);
   
   const articles: IPage[] = []
