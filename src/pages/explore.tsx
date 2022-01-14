@@ -22,7 +22,10 @@ export default function Explore ({pages, tags}: props) {
     const filterParams = history.location.search.substr(1);
     const filtersFromParams = qs.parse(filterParams);
     if (filtersFromParams.tags) {
-      setSelected(filtersFromParams.tags.split(","));
+      const query: string = filtersFromParams.tags;
+      if (typeof query === "string") {
+        setSelected(query.split(","));
+      } 
     }
   }, []);
   
