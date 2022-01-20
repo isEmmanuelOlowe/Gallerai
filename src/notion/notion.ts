@@ -2,6 +2,7 @@ import { Client } from '@notionhq/client';
 // import { GetDatabaseResponse, QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints';
 const databaseID = "da0e007fc1a44318ad65821a02f17f8b";
 const sourcesID = "2ea15fb73628449a8c53f0365cd5b9e1";
+// const exhibitsID = "67e3f8b2126d4262b87f68dd311503ad";
 // const guidesID = "4fdaf76c73cb451f996defcb61f90b94";
 // Notion client for connecting with notion database
 const notion = new Client({auth: process.env.TOKEN});
@@ -57,6 +58,25 @@ export interface IPage {
   content: IContent[],
 }
 
+export interface IGuide {
+  id: string,
+  cover: string|null,
+  title: string,
+  from?: string,
+  to?: string,
+  content?: IContent[]
+}
+
+export interface IExhibit {
+  id: string,
+  cover: string|null,
+  title: string,
+  from?: string,
+  to?: string,
+  position?: boolean,
+  exhibit: string,
+  content?: IContent[]
+}
 /**
  * Extracts all the tags which are used by the notion database for content
  * @returns the tags being used by the notion database
@@ -98,6 +118,11 @@ function extractSources(response: any): ISources {
   return sources
 }
 
+/**
+ * Gets all the source information of articles
+ * @param sourceIDs The sources of an article which are being linked
+ * @returns The page information of all the sources of an article
+ */
 export async function getPageSources(sourceIDs: string[]): Promise<ISource[]> {
   const sources: ISource[] = [];
   const databaseSources: ISources = await getSources();

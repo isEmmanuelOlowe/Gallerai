@@ -15,7 +15,7 @@ export default function HomePage() {
           <main className='content-center justify-center w-full mt-24 text-center'>
             <h1 className='text-5xl'>Mathematics in the Scottish Enlightenment</h1>
             <p>
-              Explore the world of Mathematics in the Period of Scotland between 1720-1820
+              Explore the world of Mathematics in the Period of Scotland between 1650-1820
             </p>
             <div className="mt-16 font-serif divider"><h2>Guides</h2></div> 
             <p>View Guides of different stories why tell you more about Mathematics in the Enlightenment</p>
