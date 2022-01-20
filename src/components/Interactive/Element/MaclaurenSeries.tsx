@@ -118,7 +118,6 @@ function series(func: (x: number) => number, x: number, terms = 1) {
 
   for (let i= 0; i < terms; i++) {
     total += term(0) * x ** i * factorial(i)
-    console.log(total);
     term = (x) => {
       return derivative(term, x)
     }
