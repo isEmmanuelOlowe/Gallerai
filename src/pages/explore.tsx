@@ -1,7 +1,11 @@
+import {AutoPlay,Fade,Parallax} from "@egjs/flicking-plugins";
+import Flicking from "@egjs/react-flicking";
 import { createBrowserHistory } from "history";
 import { useRouter } from 'next/router'
 import qs from "qs";
 import { useEffect, useState } from "react";
+
+import "@egjs/flicking/dist/flicking.css";
 
 import Card from "@/components/card";
 import Navbar from "@/components/Navigation/Navbar";
@@ -16,6 +20,7 @@ interface props {
 
 export default function Explore ({pages, tagNames}: props) {
   const router = useRouter();
+  const plugins = [new AutoPlay({ duration: 2000, direction: "NEXT", stopOnHover: true })];
   const {tags} = router.query;
   const [selected, setSelected] = useState<string[]>([]);
   
@@ -51,25 +56,29 @@ export default function Explore ({pages, tagNames}: props) {
       <div className="">
         <Navbar/>
         <Seo/>
-        <div className="flex flex-wrap justify-center">
+        <Flicking moveType="freeScroll" bound={true} preventClickOnDrag={false}>
           {tagNames.map(tag => {
             if (selected.includes(tag.name)) {            
-              return (<div key={tag.id} onClick={()=> select(tag.name)}>
+              return (<div className="flicking-panel" key={tag.id} onClick={()=> select(tag.name)}>
                   <Tag key={tag.id} tag={tag} selected={true}/>
                 </div>)
               }
             else {
-              return (<div key={tag.id} onClick={()=> select(tag.name)}>
+              return (<div className="flicking-panel" key={tag.id} onClick={()=> select(tag.name)}>
                   <Tag key={tag.id} tag={tag} selected={false}/>
                 </div>)
             }
             })
           }
-        </div>
-        <div className="flex flex-wrap justify-center">
-          {articles.length === 0? <h3 className="mt-10 text-base-300">No Overlap of Topics</h3> : 
-          articles.map(article => (<Card key={article.id} page={article}></Card>))}
-        </div>
+        </Flicking>
+        <div className="flex items-center flex-wrap h-[80vh]">
+          <div className="w-screen">
+            <Flicking plugins={plugins} align={"center"} deceleration={0.05} adaptive={false}>
+              {articles.length === 0? <h3 className="w-screen mt-10 text-center text-base-300">No Overlap of Topics</h3> : 
+              articles.map(article => (<div className="flex odd:h-[60vh] even:h-[55vh] my-auto" key={article.id}><Card page={article}></Card></div>))}
+            </Flicking>
+          </div>
+          </div>
         </div>
       </div>
     )

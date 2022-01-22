@@ -9,7 +9,8 @@ export default function HomePage() {
   return (
     <>
       <div className="z-10 h-screen bg-fixed bg-bottom bg-cover z-1" style={{"backgroundImage": "url(images/background.pngs"}}>
-        <div className='h-full bg-gradient-to-b from-base-100 via-base-100 to-transparent'>
+        {/* <div className='h-full bg-gradient-to-b from-base-100 via-base-100 to-transparent'> */}
+        <div className='h-full'>
           <Navbar/>
           <Seo/>
           <main className='content-center justify-center w-full mt-24 text-center'>

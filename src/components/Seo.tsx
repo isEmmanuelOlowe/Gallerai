@@ -47,6 +47,7 @@ export default function Seo(props: SeoProps) {
       <meta property='og:description' content={meta.description} />
       <meta property='og:title' content={meta.title} />
       <meta name='image' property='og:image' content={meta.image} />
+      
       {/* Twitter */}
       {/* <meta name='twitter:card' content='summary_large_image' />
       <meta name='twitter:site' content='@isemmanuelolowe' />
