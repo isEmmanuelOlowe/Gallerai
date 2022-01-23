@@ -75,7 +75,7 @@ export default function Explore ({pages, tagNames}: props) {
           <div className="w-screen">
             <Flicking plugins={plugins} align={"center"} deceleration={0.05} adaptive={false}>
               {articles.length === 0? <h3 className="w-screen mt-10 text-center text-base-300">No Overlap of Topics</h3> : 
-              articles.map(article => (<div className="flex odd:h-[60vh] even:h-[55vh] my-auto" key={article.id}><Card page={article}></Card></div>))}
+              articles.map(article => (<div className="odd:h-[60vh] even:h-[55vh] my-auto" key={article.id}><Card page={article}></Card></div>))}
             </Flicking>
           </div>
           </div>
