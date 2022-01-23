@@ -1,7 +1,7 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import * as React from 'react';
 import { useEffect,useState } from 'react';
-
 // Default Menu Items
 const navItems = [
     {
@@ -35,6 +35,7 @@ interface props {
 * The navigation bar.
 */
 export default function Navbar({textColour}: props) {
+    const router = useRouter();
     let text = "text-gray-800";
     
     if (textColour) {
@@ -74,7 +75,7 @@ export default function Navbar({textColour}: props) {
                 <div className="font-bold text-md lg:flex-grow">
                     {navItems.map(navItem => {
                         return (
-                            <Link key={navItem.name} href={navItem.url}><a className="block px-4 py-2 mt-4 mr-2 duration-200 ease-in-out hover:bg-opacity-50 hover:scale-105 lg:inline-block lg:mt-0">{navItem.name}</a></Link>
+                            <Link key={navItem.name} href={navItem.url}><a className={`block px-4 py-2 mt-4 mr-2 duration-200 ${router.pathname === navItem.url ? "border-2 lg:border-0 lg:border-b-2 border-primary-focus" : ""} ease-in-out hover:bg-opacity-50 hover:scale-105 lg:inline-block lg:mt-0`}>{navItem.name}</a></Link>
                         )
                     })}
                 </div>
