@@ -20,7 +20,7 @@ interface props {
 
 export default function Explore ({pages, tagNames}: props) {
   const router = useRouter();
-  const plugins = [new AutoPlay({ duration: 2000, direction: "NEXT", stopOnHover: true })];
+  const plugins = [new AutoPlay({ duration: 8000, direction: "NEXT", stopOnHover: true })];
   const {tags} = router.query;
   const [selected, setSelected] = useState<string[]>([]);
   
@@ -73,7 +73,7 @@ export default function Explore ({pages, tagNames}: props) {
         </Flicking>
         <div className="flex items-center flex-wrap h-[80vh]">
           <div className="w-screen">
-            <Flicking plugins={plugins} align={"center"} deceleration={0.05} adaptive={false}>
+            <Flicking plugins={plugins} align={"center"} deceleration={0.05} adaptive={false} onMove={e => {console.log(e.currentTarget)}}>
               {articles.length === 0? <h3 className="w-screen mt-10 text-center text-base-300">No Overlap of Topics</h3> : 
               articles.map(article => (<div className="odd:h-[60vh] even:h-[55vh] my-auto" key={article.id}><Card page={article}></Card></div>))}
             </Flicking>
