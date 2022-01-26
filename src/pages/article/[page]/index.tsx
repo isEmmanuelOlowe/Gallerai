@@ -35,7 +35,7 @@ export default function Article({article, sources}: IProps) {
                 </div>
                 <div className='flex flex-wrap pt-5 text-gray-600 place-content-center'>
                   {article?.tags && article.tags.map(tag => {
-                    return (<UnderlineLink className='p-2 m-2 text-accent-content' href={`/explore?tags=${encodeURI(tag)}`} key={tag} passHref>{tag}</UnderlineLink>)
+                    return (<UnderlineLink className='p-2 m-2 text-accent-content' href={`/explore?tags=${encodeURI(tag)}`} key={tag} openNewTab={true} passHref>{tag}</UnderlineLink>)
                   })}
                 </div>
                 <div className='pt-20 xl:p-40'>
