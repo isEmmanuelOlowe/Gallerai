@@ -17,7 +17,12 @@ export default function Content({content}: props) {
   }
   else if (content.type === "image") {
     return (
-      <Image width={1920} height={1080} alt={content.caption} src={content.content} />
+      <div className='flex w-full my-10'>
+        <div className='m-auto'>
+          <img className="max-h-[700px]" height="100%" alt={content.caption} src={content.content} />
+          <label className='text-sm opacity-70'>{content.caption}</label>
+        </div>
+      </div>
     )
   }
   else if (content.type === "break") {
