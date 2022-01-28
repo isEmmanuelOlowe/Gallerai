@@ -9,35 +9,7 @@ const exhibits = [
     id: 1,
     name: "MacClauren Series",
     description: "cover sdfm akdsfjmn aksd",
-    cover: "https://api.gallerai.studio/images/cover/john_playfair.jpg",
-    href: "macclauren series"
-  },
-     {
-    id: 1,
-    name: "MacClauren Series",
-    description: "cover sdfm akdsfjmn aksd",
-    cover: "https://api.gallerai.studio/images/cover/john_playfair.jpg",
-    href: "macclauren series"
-  },
-   {
-    id: 1,
-    name: "MacClauren Series",
-    description: "cover sdfm akdsfjmn aksd",
-    cover: "https://api.gallerai.studio/images/cover/john_playfair.jpg",
-    href: "macclauren series"
-  },
-   {
-    id: 1,
-    name: "MacClauren Series",
-    description: "cover sdfm akdsfjmn aksd",
-    cover: "https://api.gallerai.studio/images/cover/john_playfair.jpg",
-    href: "macclauren series"
-  },
-   {
-    id: 1,
-    name: "MacClauren Series",
-    description: "cover sdfm akdsfjmn aksd",
-    cover: "https://api.gallerai.studio/images/cover/john_playfair.jpg",
+    cover: "https://media.snl.no/media/70310/standard_compressed_Colin_Maclaurin_color.jpg",
     href: "macclauren series"
   },
 ]
