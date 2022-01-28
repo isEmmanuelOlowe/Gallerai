@@ -29,7 +29,7 @@ export default function Article({article, sources}: IProps) {
             <Navbar/>
             <Seo templateTitle={article? article.title: ""}/>
             <div className='flex place-content-center'>
-              <div className='w-[95%] min-h-screen p-4 mt-32 bg-neutral-content md:p-20 md:w-5/6'>
+              <article className='w-[95%] min-h-screen p-4 mt-32 bg-neutral-content md:p-20 md:w-5/6'>
                 <div className='mt-5 text-center'>
                   <h1 className='text-4xl'>{article? article.title: "Loading..."}</h1>
                 </div>
@@ -46,7 +46,7 @@ export default function Article({article, sources}: IProps) {
                   : <></>}
                 </div>
                 { article? <SourceSection sources={sources}/>:<></>}
-              </div>
+              </article>
             </div>
     
         </div>
