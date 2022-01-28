@@ -32,7 +32,7 @@ export default function Content({content}: props) {
   }
   else {
     return (
-        <p className="text-[0.91rem] md:text-base first:first-letter:font-serif first:first-line:uppercase first:first-line:tracking-widest
+        <p className="text-[0.91rem] md:text-base first:first-letter:font-serif 
   first:first-letter:text-7xl first:first-letter:font-bold first:first-letter:text-slate-900
   first:first-letter:mr-3 first:first-letter:float-left pb-5">{content.content}</p>
       )
