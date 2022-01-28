@@ -24,6 +24,7 @@ export interface ITag {
 export interface IContent {
   type: string,
   content: string,
+  caption?: string,
 }
 
 export interface ISource {
@@ -233,6 +234,9 @@ function addBlock(blockType: any): IContent{
         break;
       case "heading_2":
         content = {"type": "heading_2", "content": blockType["heading_2"]["text"][0]["text"]["content"]}
+        break;
+      case "image":
+        content = {"type": "image", "content": blockType["image"]["external"]["url"], "caption": blockType["image"]["caption"][0]? blockType["image"]["caption"][0]: ""}
         break;
       default:
         if (blockType["paragraph"]["text"]["0"] === undefined) {
