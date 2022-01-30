@@ -67,7 +67,7 @@ export default function Explore ({pages, tagNames}: props) {
           }
         </Flicking>
         <div className="flex items-center flex-wrap h-[70vh] ease-in-out duration-1000">
-            <div className="hidden pt-4 pb-2 m-auto font-serif text-4xl text-center duration-200 ease-in-out md:block">{panels.current? panels.current.currentPanel? articles[panels.current.currentPanel._index]? articles[panels.current.currentPanel._index].title: articles[0].title: articles[0].title: articles[0].title}</div>
+            <div className="hidden pt-4 pb-2 m-auto font-serif text-4xl text-center duration-200 ease-in-out md:block">{panels.current? panels.current.currentPanel? articles[panels.current.currentPanel._index]? articles[panels.current.currentPanel.getIndex()].title: articles[0].title: articles[0].title: articles[0].title}</div>
           <div className="w-screen duration-1000 ease-in-out">
             <Flicking plugins={plugins} align={"center"} deceleration={0.02} onChanged={(e: ChangedEvent) => {setCurrentPanel(e.panel._index)}} ref={panels}>
               {articles.length === 0? <h3 className="w-screen mt-10 text-center text-base-300">No Overlap of Topics</h3> : 
