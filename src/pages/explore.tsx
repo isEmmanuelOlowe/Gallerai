@@ -1,5 +1,5 @@
 import {AutoPlay,Fade,Parallax} from "@egjs/flicking-plugins";
-import Flicking, {changedEvent} from "@egjs/react-flicking";
+import Flicking, {ChangedEvent} from "@egjs/react-flicking";
 import { createBrowserHistory } from "history";
 import { useRouter } from 'next/router'
 import qs from "qs";
@@ -69,7 +69,7 @@ export default function Explore ({pages, tagNames}: props) {
         <div className="flex items-center flex-wrap h-[70vh] ease-in-out duration-1000">
             <div className="hidden pt-4 pb-2 m-auto font-serif text-4xl text-center duration-200 ease-in-out md:block">{panels.current? panels.current.currentPanel? articles[panels.current.currentPanel._index]? articles[panels.current.currentPanel._index].title: articles[0].title: articles[0].title: articles[0].title}</div>
           <div className="w-screen duration-1000 ease-in-out">
-            <Flicking plugins={plugins} align={"center"} deceleration={0.02} onChanged={(e: changedEvent) => {setCurrentPanel(e.panel._index)}} ref={panels}>
+            <Flicking plugins={plugins} align={"center"} deceleration={0.02} onChanged={(e: ChangedEvent) => {setCurrentPanel(e.panel._index)}} ref={panels}>
               {articles.length === 0? <h3 className="w-screen mt-10 text-center text-base-300">No Overlap of Topics</h3> : 
               articles.map(article => (<div className="odd:h-[60vh] even:h-[55vh] my-auto w-96 hover:lg:w-[26rem] ease-in-out duration-1000 hover:odd:lg:h-[61vh] hover:even:lg:h-[56vh]" key={article.id}><Card page={article}></Card></div>))}
             </Flicking>
