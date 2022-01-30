@@ -3,7 +3,7 @@ import Flicking, {ChangedEvent} from "@egjs/react-flicking";
 import { createBrowserHistory } from "history";
 import { useRouter } from 'next/router'
 import qs from "qs";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef,useState } from "react";
 
 import "@egjs/flicking/dist/flicking.css";
 
@@ -67,7 +67,7 @@ export default function Explore ({pages, tagNames}: props) {
           }
         </Flicking>
         <div className="flex items-center flex-wrap h-[70vh] ease-in-out duration-1000">
-            <div className="hidden pt-4 pb-2 m-auto font-serif text-4xl text-center duration-200 ease-in-out md:block">{panels.current? panels.current.currentPanel? articles[panels.current.index]? articles[panels.current.index].title: articles[0].title: articles[0].title: articles[0].title}</div>
+            <div className="hidden pt-4 pb-2 m-auto font-serif text-4xl text-center duration-200 ease-in-out md:block">{panels.current? panels.current.currentPanel? articles[panels.current.index]? articles[panels.current.index].title: articles[0]? articles[0].title: "": articles[0].title: articles[0].title}</div>
           <div className="w-screen duration-1000 ease-in-out">
             <Flicking plugins={plugins} align={"center"} deceleration={0.02} onChanged={(e: ChangedEvent) => {setCurrentPanel(e.index)}} ref={panels}>
               {articles.length === 0? <h3 className="w-screen mt-10 text-center text-base-300">No Overlap of Topics</h3> : 
