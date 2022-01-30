@@ -20,7 +20,7 @@ interface props {
 
 export default function Explore ({pages, tagNames}: props) {
   const router = useRouter();
-  const panels = useRef<Flicking>();
+  const panels = useRef<Flicking>(null);
   const plugins = [new AutoPlay({ duration: 8000, direction: "NEXT", stopOnHover: true })];
   const {tags} = router.query;
   const [selected, setSelected] = useState<string[]>([]);
