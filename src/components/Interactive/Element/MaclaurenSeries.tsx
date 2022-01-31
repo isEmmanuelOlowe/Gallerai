@@ -85,7 +85,7 @@ export default function MaclaurenSeries() {
 
   return (
     <>
-      <h2 className="mb-32 font-serif divider">Maclaurin Series Generator</h2>
+      <h2 className="mb-24 font-serif text-center divider">Maclaurin Series Generator</h2>
       <div className="flex flex-wrap content-center justify-center w-full gap-2">
         <div className="flex flex-wrap content-center m-auto">
           <div className='flex flex-wrap content-center m-auto'>
