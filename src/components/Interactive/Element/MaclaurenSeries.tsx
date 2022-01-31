@@ -1,6 +1,6 @@
 import TeX from '@matejmazur/react-katex';
 import { useState } from "react";
-import {DomainPropType, VictoryChart, VictoryLine,VictoryTheme } from "victory";
+import {VictoryChart, VictoryLine,VictoryTheme } from "victory";
 
 import 'katex/dist/katex.min.css';
 interface Forumlas {
