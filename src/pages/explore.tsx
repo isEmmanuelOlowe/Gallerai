@@ -1,8 +1,6 @@
-import {AutoPlay,Fade,Parallax} from "@egjs/flicking-plugins";
+import {AutoPlay} from "@egjs/flicking-plugins";
 import Flicking, {ChangedEvent} from "@egjs/react-flicking";
-import { createBrowserHistory } from "history";
 import { useRouter } from 'next/router'
-import qs from "qs";
 import { useEffect, useRef,useState } from "react";
 
 import "@egjs/flicking/dist/flicking.css";

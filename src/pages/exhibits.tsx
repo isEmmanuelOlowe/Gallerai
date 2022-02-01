@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { VictoryChart, VictoryLine,VictoryTheme } from "victory";
 
 import Navbar from "@/components/Navigation/Navbar";
 import Seo from "@/components/Seo";
@@ -17,7 +16,7 @@ export default function Exhibits() {
 
   return(
     <>
-      <Seo/>
+      <Seo templateTitle="Interactive Exhibits on Mathematics in the Scottish Englightenment"/>
       <Navbar/>
       <h1 className="mt-5 text-center divider">Exhibits</h1>
       <p className="m-1 text-center">

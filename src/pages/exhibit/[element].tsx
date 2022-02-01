@@ -9,6 +9,7 @@ export default function ExhibitPage() {
     <div className='bg-gradient-to-b from-primary-focus to-neutral-focus'>
       <div className='h-full bg-fixed'>
         <div className='bg-white bg-opacity-5 backdrop-filter backdrop-blur-sm'>
+            <Seo/>
             <Navbar/>
             {/* <Seo templateTitle={article? article.title: ""}/> */}
             <div className='flex place-content-center'>
