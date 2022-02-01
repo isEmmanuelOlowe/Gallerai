@@ -1,4 +1,5 @@
 import { Client } from '@notionhq/client';
+import { getDatabase } from '@notionhq/client/build/src/api-endpoints';
 // import { GetDatabaseResponse, QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints';
 const databaseID = "da0e007fc1a44318ad65821a02f17f8b";
 const sourcesID = "2ea15fb73628449a8c53f0365cd5b9e1";
@@ -48,9 +49,10 @@ export interface IPage {
   id: string,
   cover: string|null,
   title: string,
+  summary: string,
   tags: string[],
-  from?: number,
-  to?: number,
+  from: number,
+  to: number,
   // related pages
   related?: string[],
   // sources
@@ -159,9 +161,12 @@ async function getPageData(data_json:any): Promise<IPages> {
       id: page["id"],
       title: page["properties"]["Name"]["title"][0]["text"]["content"],
       cover: getCover(page),
+      summary: getSummary(page["properties"]["Summary"]),
       tags: [],
       content: [],
       sources: getPageSourceIDs(page["properties"]["Sources"]["relation"]),
+      from: getYear(page["properties"]["Date From"]),
+      to: getYear(page["properties"]["Date To"])
     }
     pageData.tags = stripTags(page["properties"]["Tags"]["multi_select"]);
     pages[cleanString(pageData.title)] = pageData;
@@ -169,6 +174,31 @@ async function getPageData(data_json:any): Promise<IPages> {
   return pages
 }
 
+
+/**
+ * Extracts the summary of the articles from data
+ * @param summary the json data containing the summary
+ * @returns returns the summary
+ */
+function getSummary(summary: any) {
+  if (summary["rich_text"][0]) {
+    return summary["rich_text"][0]["text"]["content"]
+  }
+  return ""
+}
+/**
+ * Extracts the years of validity of the article
+ * @param yearData the json data containing the year
+ * @returns the year stated or zero otherwise
+ */
+function getYear(yearData: any): number {
+  if (yearData["number"] == null) {
+    return 0
+  }
+  else {
+    return yearData["number"]
+  }
+}
 /**
  * Extracts all the names of tags from Tag object
  * @param tags the page objects being extracted

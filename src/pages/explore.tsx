@@ -73,6 +73,9 @@ export default function Explore ({pages, tagNames}: props) {
             </Flicking>
           </div>
           </div>
+            <p className="mt-5 text-lg text-center m-auto text-neutral max-w-[24rem]">
+              {panels.current? panels.current.currentPanel? articles[panels.current.index]? articles[panels.current.index].summary: "": articles[0].summary: articles[0].summary}
+            </p>
         </div>
       </div>
     )
