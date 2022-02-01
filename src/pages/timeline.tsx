@@ -1,6 +1,3 @@
-import { ImFolderPlus } from "react-icons/im";
-
-import Timeline from "@/components/Interactive/Timeline";
 import Navbar from "@/components/Navigation/Navbar";
 import Seo from "@/components/Seo";
 
@@ -31,7 +28,7 @@ export default function TimelinePage({pages}: props) {
                 <div className="divider">{year}</div>
               </div>))
             }
-            <div className="w-48 h-48 col-start-1 text-center bg-purple-500 row-start-14">
+            <div className="w-48 h-24 col-start-1 text-center bg-purple-500 row-start-14">
               <h6>After the Enlightenment</h6>
             </div>
             {
