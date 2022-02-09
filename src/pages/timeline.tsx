@@ -28,7 +28,7 @@ export default function TimelinePage({pages}: props) {
                 <div className="divider">{year}</div>
               </div>))
             }
-            <div className="w-48 h-24 col-start-1 text-center bg-purple-500 row-start-14">
+            <div className="w-48 h-32 col-start-1 text-center bg-purple-500 row-start-14">
               <h6>After the Enlightenment</h6>
             </div>
             {

@@ -1,5 +1,6 @@
 import UnderlineLink from "@/components/Navigation/links/UnderlineLink"
 
+import { cleanString } from "@/notion/notion"
 import { ISource } from "@/notion/notion"
 
 interface props {
@@ -15,7 +16,7 @@ export default function SourceSection({sources}: props) {
       <ul className="list-[square] text-lg text-neutral md:w-1/2 m-auto p-3">
         {sources.map(source => {
           return (
-          <li  key={source.id}><UnderlineLink className="text-base" href={`/sources/${encodeURIComponent(source.name)}`}>{source.name}<span className="pl-5 font-serif text-sm opacity-80">[{source.type}, {source.year}]</span></UnderlineLink></li>)
+          <li  key={source.id}><UnderlineLink className="text-base" href={`/sources/${encodeURIComponent(cleanString(source.name))}`}>{source.name}<span className="pl-5 font-serif text-sm opacity-80">[{source.type}, {source.year}]</span></UnderlineLink></li>)
         })}
       </ul>
     </div>

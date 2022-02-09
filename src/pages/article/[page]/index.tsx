@@ -1,4 +1,3 @@
-import { GetStaticPaths, GetStaticProps } from 'next'
 import { useRouter } from "next/router";
 
 import Error from '@/components/Error';

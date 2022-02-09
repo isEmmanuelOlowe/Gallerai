@@ -228,7 +228,7 @@ function getCover(page: any): string | null {
   }
   else {
     return null;
-  }
+  } 
 }
 
 /**
@@ -284,8 +284,8 @@ function addBlock(blockType: any): IContent{
  * @param text the string being to be cleaned
  * @returns the cleaned string
  */
-function cleanString(text: string): string {
-  return(text.replace("/[/.?=&:#]+/g", ""))
+export function cleanString(text: string): string {
+  return(text.replace(/[/.?=&:#]+/g, ""))
 }
 
 
