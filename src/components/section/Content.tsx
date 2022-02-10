@@ -15,6 +15,11 @@ export default function Content({content}: props) {
       <h4 className="pt-2 pb-2 font-serif text-xl">{content.content}</h4>
     )
   }
+  else if (content.type === "quote") {
+    return (
+      <p className='text-[0.91rem] md:text-base border-l-2 border-neutral-focus p-5 opacity-80 font-serif'>&quot;{content.content}&quot;</p>
+    )
+  }
   else if (content.type === "image") {
     return (
       <div className='flex w-full my-10'>

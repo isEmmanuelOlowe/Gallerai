@@ -268,6 +268,9 @@ function addBlock(blockType: any): IContent{
       case "image":
         content = {"type": "image", "content": blockType["image"]["external"]["url"], "caption": blockType["image"]["caption"][0]? blockType["image"]["caption"][0]["text"]["content"]: ""}
         break;
+      case "quote":
+        content = {"type":"quote", "content": blockType["quote"]["text"][0]["text"]["content"]}
+        break;
       default:
         if (blockType["paragraph"]["text"]["0"] === undefined) {
           content = {"type":"break", "content": ""};
