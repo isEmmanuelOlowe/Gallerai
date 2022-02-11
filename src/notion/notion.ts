@@ -112,6 +112,7 @@ function extractSources(response: any): ISources {
       id: response.results[i].id,
       name: response.results[i].properties["Name"]["title"][0]["plain_text"],
       type: response.results[i].properties["Type"]["select"]["name"],
+      authors: getAuthors(response.results[i].properties["Author"]["multi_select"]),
       publisher: response.results[i].properties["Publisher"]["select"]? response.results[i].properties["Publisher"]["select"]["name"]:null,
       year: response.results[i].properties["Publishing/Release Date"]["number"],
       url: response.results[i].properties["Link"]["url"],
@@ -121,6 +122,15 @@ function extractSources(response: any): ISources {
   return sources
 }
 
+
+function getAuthors(authorsJson: any): string[] {
+  const authors: string[] = [];
+  for (let i = 0; i < authorsJson.length; i++) {
+    authors.push(authorsJson[i].name);
+  }
+
+  return authors;
+}
 /**
  * Gets all the source information of articles
  * @param sourceIDs The sources of an article which are being linked

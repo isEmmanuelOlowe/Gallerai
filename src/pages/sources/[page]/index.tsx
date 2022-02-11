@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 
 import Error from '@/components/Error';
+import UnderlineLink from "@/components/Navigation/links/UnderlineLink";
 import Navbar from "@/components/Navigation/Navbar";
 import Seo from "@/components/Seo";
 
@@ -36,22 +37,29 @@ export default function Source({source}: IProps) {
                   })} */}
                 </div>
                 <div className='mt-5 text-center'>
-                  <h1 className='text-4xl'>{source? source.name: "Loading..."}</h1>
+                  <UnderlineLink href={source.url? source.url: ""}><h1 className='text-4xl'>{source? source.name: "Loading..."}</h1></UnderlineLink>
+                  
                 </div>
-                <div className='flex flex-wrap pt-5 text-gray-600 place-content-center'>
+                <div className='pt-5 text-center text-gray-600 place-content-center'>
                     {
                       source? <>
-                      <span>
-                        {source.publisher}
-                      </span>
-                      <span>
-                        {source.isbn}
-                      </span>
+                      <div className="">
+                        <span className="font-semibold">
+                          Publisher: 
+                        </span>
+                        <span>
+                          {source.publisher}
+                        </span>
+                        <span>
+                          {source.isbn}
+                        </span>
+                      </div>
+                      <div>
+                        <span className="font-semibold">Author(s):</span>
                         {source.authors?.map(author => {
-                          return <span key={author}>{author}</span>
+                          return <span className="px-2" key={author}>{author}</span>
                         })}
-                      <span>
-                      </span>
+                      </div>
                       </>:
                       <></>
                     }
