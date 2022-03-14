@@ -175,6 +175,7 @@ async function getPageData(data_json:any): Promise<IPages> {
       title: page["properties"]["Name"]["title"][0]["text"]["content"],
       cover: getCover(page),
       summary: getSummary(page["properties"]["Summary"]),
+      interactive: getSummary(page["properties"]["Interactive"]),
       tags: [],
       content: [],
       sources: getPageSourceIDs(page["properties"]["Sources"]["relation"]),
