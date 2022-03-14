@@ -25,6 +25,7 @@ export interface ITag {
 export interface IContent {
   type: string,
   content: string,
+  contents?: IContent[],
   caption?: string,
 }
 
@@ -59,6 +60,8 @@ export interface IPage {
   sources: string[]
   // page content
   content: IContent[],
+  //interative element
+  interactive: string,
 }
 
 export interface IGuide {
@@ -275,15 +278,30 @@ function addBlock(blockType: any): IContent{
       case "heading_2":
         content = {"type": "heading_2", "content": blockType["heading_2"]["text"][0]["text"]["content"]}
         break;
+      case "equation":
+        content = {"type": "equation", "content": blockType["equation"]["expression"]}
+        break;
       case "image":
         content = {"type": "image", "content": blockType["image"]["external"]["url"], "caption": blockType["image"]["caption"][0]? blockType["image"]["caption"][0]["text"]["content"]: ""}
         break;
       case "quote":
         content = {"type":"quote", "content": blockType["quote"]["text"][0]["text"]["content"]}
         break;
+      case "text":
+        content = {"type":"text", "content": blockType["text"]["content"]};
+        break;
       default:
-        if (blockType["paragraph"]["text"]["0"] === undefined) {
+        if (blockType["paragraph"] === undefined) {
           content = {"type":"break", "content": ""};
+        }
+        else if (blockType["paragraph"]["text"] === undefined) {
+          content = {"type":"break", "content": ""};
+        }
+        else if (blockType["paragraph"]["text"].length == 0) {
+          content = {"type":"break", "content": ""};
+        }
+        else if (blockType["paragraph"]["text"].length > 1) {
+          content = extractComposite(blockType["paragraph"]["text"]);
         }
         else {
           content =  {"type":"text", "content": blockType["paragraph"]["text"]["0"]["text"]["content"]}
@@ -292,6 +310,16 @@ function addBlock(blockType: any): IContent{
     return content
 }
 
+
+function extractComposite(text: any): IContent {
+  const content: IContent = {type: "composite", content:"composite", contents: []};
+  for (let i = 0; i < text.length; i++) {
+    if (content.contents) {
+      content.contents.push(addBlock(text[i]))
+    }
+  }
+  return content;
+}
 /**
  * Removes characters which can not be present in URL
  * @param text the string being to be cleaned

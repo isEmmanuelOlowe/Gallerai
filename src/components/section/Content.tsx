@@ -1,10 +1,15 @@
+import TeX from '@matejmazur/react-katex';
 import Image from 'next/image'
 
+import 'katex/dist/katex.min.css';
+
 import { IContent } from "@/notion/notion";
+
 interface props {
   content: IContent;
+  block: boolean
 }
-export default function Content({content}: props) {
+export default function Content({content, block = true}: props) {
   if (content.type === "heading_1") {
     return (
       <h3 className="pt-5 pb-5 font-serif text-2xl">{content.content}</h3>
@@ -30,16 +35,37 @@ export default function Content({content}: props) {
       </div>
     )
   }
+  else if (content.type == "equation") {
+    if (block) {
+     return <TeX block>{content.content}</TeX>
+    }
+    else {
+      return <TeX>{content.content}</TeX>
+    }
+  }
+  else if (content.type === "composite") {
+    return (
+      <p>
+        {content.contents?.map((item, index) => {
+          return <Content key={index} content={item} block={false}/>})}
+      </p>
+    )
+  }
   else if (content.type === "break") {
     return (
       <br/>
     )
   }
   else {
-    return (
-        <p className="text-[0.91rem] md:text-base first:first-letter:font-serif 
+    if (block) {
+      return <p className="text-[0.91rem] md:text-base first:first-letter:font-serif 
   first:first-letter:text-7xl first:first-letter:font-bold
   first:first-letter:mr-3 first:first-letter:float-left pb-5 first:first-letter:mt-[-1.5rem]">{content.content}</p>
-      )
+    }
+    else {
+      return (
+        <span className="text-[0.91rem] md:text-base">{content.content}</span>
+        )
+    }
     }
 }

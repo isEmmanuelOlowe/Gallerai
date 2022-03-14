@@ -13,14 +13,6 @@ const navItems = [
         url: "/explore"
     },
     {
-        name: "Guides",
-        url: "/guides"
-    },
-    {
-        name: "Exhibits",
-        url: "/exhibits"
-    },
-    {
         name: "Sources",
         url: "/sources"
     }
