@@ -7,7 +7,7 @@ import { IContent } from "@/notion/notion";
 
 interface props {
   content: IContent;
-  block: boolean
+  block?: boolean
 }
 export default function Content({content, block = true}: props) {
   if (content.type === "heading_1") {
