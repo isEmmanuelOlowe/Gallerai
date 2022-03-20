@@ -1,4 +1,3 @@
-import Flicker from "@egjs/flicking";
 import {AutoPlay} from "@egjs/flicking-plugins";
 import Flicking, {ChangedEvent} from "@egjs/react-flicking";
 import { useRouter } from 'next/router'
