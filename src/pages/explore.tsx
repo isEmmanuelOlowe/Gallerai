@@ -1,3 +1,4 @@
+import Flicker from "@egjs/flicking";
 import {AutoPlay} from "@egjs/flicking-plugins";
 import Flicking, {ChangedEvent} from "@egjs/react-flicking";
 import { useRouter } from 'next/router'
@@ -18,9 +19,10 @@ interface props {
 
 export default function Explore ({pages, tagNames}: props) {
   const router = useRouter();
-  const panels = useRef<Flicking>(null);
+  const panels = useRef<Flicking>();
   const plugins = [new AutoPlay({ duration: 8000, direction: "NEXT", stopOnHover: true })];
   const [currentPanel, setCurrentPanel] = useState(0);
+  const [ready, setReady] = useState(false);
   const {tags} = router.query;
   const [selected, setSelected] = useState<string[]>([]);
   
@@ -44,19 +46,30 @@ export default function Explore ({pages, tagNames}: props) {
     }
   }, [tags])
   
+
   const articles: IPage[] = []
-  Object.entries(pages).map(([key, page]) => {
+  Object.entries(pages).map(([key]) => {
+    const page = pages[key];
     if (selected === [] || selected.every(tag => page.tags.includes(tag))) {
       articles.push(page)
       }
     })
-
+    
+    const  Carousel = () => {
+      return <Flicking id="flicking1" className="flicking flicking1"  plugins={plugins} align={"center"} deceleration={0.02} onChanged={(e: ChangedEvent) => {setCurrentPanel(e.index)}} ref={panels as any}>
+              {articles.length === 0? <h3 className="w-screen mt-10 text-center text-base-300">No Overlap of Topics</h3> : 
+              articles.map(article => (<div className="odd:h-[60vh] even:h-[55vh] my-auto w-96 hover:lg:w-[26rem] ease-in-out duration-1000 hover:odd:lg:h-[61vh] hover:even:lg:h-[56vh]" key={article.id}><Card page={article}></Card></div>))}
+            </Flicking>}
+            // catch (e) {
+            //   console.log("here");
+            //   return <> WTF {e.message}</>
+            // }}
     return(
     <div className="min-h-screen">
       <div className="">
         <Navbar/>
         <Seo/>
-        <Flicking moveType="freeScroll" bound={true} preventClickOnDrag={false}>
+        <Flicking id="flicking0" renderOnlyVisible={true} className="flicking flicking0" moveType="freeScroll" bound={true} preventClickOnDrag={false}>
           {tagNames.map(tag => {
             return <div className="flicking-panel" key={tag.id} onClick={()=> select(tag.name)}>
                   <Tag key={tag.id} tag={tag} selected={selected.includes(tag.name)}/>
@@ -65,16 +78,17 @@ export default function Explore ({pages, tagNames}: props) {
           }
         </Flicking>
         <div className="flex items-center flex-wrap h-[70vh] ease-in-out duration-1000">
-            <div className="hidden pt-4 pb-2 m-auto font-serif text-4xl text-center duration-200 ease-in-out md:block">{panels.current? panels.current.currentPanel? articles[panels.current.index]? articles[panels.current.index].title: "": articles[0].title: articles[0].title}</div>
+            <div className="hidden pt-4 pb-2 m-auto font-serif text-4xl text-center duration-200 ease-in-out md:block">{articles.length != 0 && panels.current? panels.current.currentPanel? articles[panels.current.index]? articles[panels.current.index].title: articles[0].title: articles[0].title: ""}</div>
           <div className="w-screen duration-1000 ease-in-out">
-            <Flicking plugins={plugins} align={"center"} deceleration={0.02} onChanged={(e: ChangedEvent) => {setCurrentPanel(e.index)}} ref={panels}>
+            {/* <Carousel/> */}
+            <Flicking id="flicking1" className="flicking flicking1" onReady={() => setReady(!ready)} plugins={plugins} align={"center"} deceleration={0.02} onChanged={(e: ChangedEvent) => {setCurrentPanel(e.index)}} ref={panels as any}>
               {articles.length === 0? <h3 className="w-screen mt-10 text-center text-base-300">No Overlap of Topics</h3> : 
-              articles.map(article => (<div className="odd:h-[60vh] even:h-[55vh] my-auto w-96 hover:lg:w-[26rem] ease-in-out duration-1000 hover:odd:lg:h-[61vh] hover:even:lg:h-[56vh]" key={article.id}><Card page={article}></Card></div>))}
+              ready && articles.map(article => (<div className="odd:h-[60vh] even:h-[55vh] my-auto w-96 hover:lg:w-[26rem] ease-in-out duration-1000 hover:odd:lg:h-[61vh] hover:even:lg:h-[56vh]" key={article.id}><Card page={article}></Card></div>))}
             </Flicking>
           </div>
           </div>
             <p className="mt-5 text-lg text-center m-auto text-neutral max-w-[24rem]">
-              {panels.current? panels.current.currentPanel? articles[panels.current.index]? articles[panels.current.index].summary: "": articles[0].summary: articles[0].summary}
+              {articles.length != 0 && panels.current? panels.current.currentPanel? articles[panels.current.index]? articles[panels.current.index].summary: articles[0].summary: articles[0].summary: ""}
             </p>
         </div>
       </div>

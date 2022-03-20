@@ -61,7 +61,7 @@ export interface IPage {
   // page content
   content: IContent[],
   //interative element
-  interactive: string,
+  interactive: string[],
 }
 
 export interface IGuide {
@@ -131,7 +131,7 @@ function getAuthors(authorsJson: any): string[] {
   for (let i = 0; i < authorsJson.length; i++) {
     authors.push(authorsJson[i].name);
   }
-
+  
   return authors;
 }
 /**
@@ -165,9 +165,9 @@ export async function getPages(): Promise<IPages> {
  * @returns the list of page objects
  */
 async function getPageData(data_json:any): Promise<IPages> {
-
+  
   const pages: IPages = {};
-
+  
   for (let i = 0; i < data_json["results"].length; i++) {
     const page = data_json["results"][i];
     const pageData: IPage = {
@@ -175,7 +175,7 @@ async function getPageData(data_json:any): Promise<IPages> {
       title: page["properties"]["Name"]["title"][0]["text"]["content"],
       cover: getCover(page),
       summary: getSummary(page["properties"]["Summary"]),
-      interactive: getSummary(page["properties"]["Interactive"]),
+      interactive: getSummary(page["properties"]["Interactive"]).split(","),
       tags: [],
       content: [],
       sources: getPageSourceIDs(page["properties"]["Sources"]["relation"]),

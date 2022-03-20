@@ -1,11 +1,25 @@
-import * as React from 'react';
-
 // import UnstyledLink from '@/components/links/UnstyledLink';
 // import ButtonLink from '@/components/links/ButtonLink';
+import { TagCloud } from 'react-tagcloud'
+
+import UnderlineLink from '@/components/Navigation/links/UnderlineLink';
 import Navbar from '@/components/Navigation/Navbar';
 import Seo from '@/components/Seo';
 
-export default function HomePage() {
+import { getTags,ITag } from '@/notion/notion';
+
+interface props {
+  tags: ITag[]
+}
+export default function HomePage({tags}: props) {
+
+  const bag = tags.map((tag, index) => {
+    return {
+      value: tag.name,
+      count: (index > 5)? index: 10,
+    }
+  })
+  console.log(bag);
   return (
     <>
       <div className="z-10 h-screen bg-fixed bg-bottom bg-cover z-1" style={{"backgroundImage": "url(images/background.pngs"}}>
@@ -18,8 +32,14 @@ export default function HomePage() {
             <p>
               Explore the world of Mathematics in the Period of Scotland between 1650-1820
             </p>
-            <div className="mt-16 font-serif divider"><h2></h2></div> 
-
+            <div className="mt-16 font-serif divider"><h2>How to Use</h2></div>
+            <p>
+              Explore the world of Mathematics in the Scottish Enlightenment through metadata
+            </p>
+            <div className="mt-16 font-serif divider"><h2>Tags</h2></div>
+            <span className='font-serif font-5xl hflex flex-wrap gap-20'>
+              <TagCloud minSize={20} maxSize={40} disableRandomColor={true} renderer={customRenderer} shuffle={false} tags={bag}/>
+            </span>
           </main>
         </div>
       </div>
@@ -27,7 +47,11 @@ export default function HomePage() {
   );
 }
 
-
+const customRenderer = (tag: any, size: number, color: string) => {
+  return (
+    <UnderlineLink key={tag.value} style={{ color, fontSize: `${size}px` }}  className='p-2 m-2 text-accent-content m-[3px] border-b-2 border-black hover:scale-110 hover:border-white ease-in-out duration-150 font hover:text-white' href={`/explore?tags=${encodeURI(tag.value)}`} >{tag.value}</UnderlineLink>
+  )
+}
 /**
  * Default info that you should change:
  * components/Seo.tsx
@@ -36,3 +60,14 @@ export default function HomePage() {
  *
  * Please refer to the README.md
  */
+
+export async function getStaticProps() {
+  const tags: ITag[] = await getTags();
+
+  return {
+    props : {
+      tags,
+    },
+    revalidate: 1,
+  }
+}

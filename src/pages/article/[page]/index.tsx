@@ -5,6 +5,7 @@ import UnderlineLink from '@/components/Navigation/links/UnderlineLink';
 import Navbar from "@/components/Navigation/Navbar";
 import Content from '@/components/section/Content';
 import SourceSection from '@/components/section/SourceSection';
+import Selector from "@/components/Selector";
 import Seo from "@/components/Seo";
 
 import { getPageContent,getPages, getPageSources, IPage, IPages, ISource } from '@/notion/notion';
@@ -34,15 +35,22 @@ export default function Article({article, sources}: IProps) {
                 </div>
                 <div className='flex flex-wrap pt-5 text-gray-600 place-content-center'>
                   {article?.tags && article.tags.map(tag => {
-                    return (<UnderlineLink className='p-2 m-2 text-accent-content' href={`/explore?tags=${encodeURI(tag)}`} key={tag} openNewTab={true}>{tag}</UnderlineLink>)
+                    return (<UnderlineLink className='p-2 m-2 text-accent-content' href={`/explore?tags=${encodeURI(tag)}`} key={tag}>{tag}</UnderlineLink>)
                   })}
                 </div>
                 <div className='pt-20 xl:p-40'>
                   {
-                    article? article.content.map(function(content, index) {
+                    article? article.content.map((content, index) => {
                         return (<Content key={index} content={content}/>)
                     })
                   : <></>}
+                </div>
+                <div>
+                  {
+                    article? article.interactive.map((interactive, index) => {
+                      return <Selector key={index} element={interactive}/>
+                    }) :<></>
+                  }
                 </div>
                 { article? <SourceSection sources={sources}/>:<></>}
               </article>
