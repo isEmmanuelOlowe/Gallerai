@@ -19,7 +19,6 @@ export default function HomePage({tags}: props) {
       count: (index > 5)? index: 10,
     }
   })
-  console.log(bag);
   return (
     <>
       <div className="z-10 h-screen bg-fixed bg-bottom bg-cover z-1" style={{"backgroundImage": "url(images/background.pngs"}}>
