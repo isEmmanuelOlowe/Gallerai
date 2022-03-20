@@ -180,12 +180,30 @@ async function getPageData(data_json:any): Promise<IPages> {
       content: [],
       sources: getPageSourceIDs(page["properties"]["Sources"]["relation"]),
       from: getYear(page["properties"]["Date From"]),
-      to: getYear(page["properties"]["Date To"])
+      to: getYear(page["properties"]["Date To"]),
+      related: getRelated(page["properties"]["Related"]["relation"], page["properties"]["Related to Scottish Enlightenment Zettel (Related)"]["relation"])
     }
     pageData.tags = stripTags(page["properties"]["Tags"]["multi_select"]);
     pages[cleanString(pageData.title)] = pageData;
   }
   return pages
+}
+
+/**
+ * 
+ */
+function getRelated(relatedFrom: any, relatedTo: any) {
+  const related: string[] = [];
+  
+  for (let i = 0; i < relatedFrom.length; i++) {
+    !related.includes(relatedFrom[i].id) && related.push(relatedFrom[i].id);
+  }
+
+  for (let i = 0; i < relatedTo.length; i++) {
+    !related.includes(relatedTo[i].id) && related.push(relatedTo[i].id);
+  }
+
+  return related
 }
 
 

@@ -54,22 +54,13 @@ export default function Explore ({pages, tagNames}: props) {
       }
     })
     
-    const  Carousel = () => {
-      return <Flicking id="flicking1" className="flicking flicking1"  plugins={plugins} align={"center"} deceleration={0.02} onChanged={(e: ChangedEvent) => {setCurrentPanel(e.index)}} ref={panels as any}>
-              {articles.length === 0? <h3 className="w-screen mt-10 text-center text-base-300">No Overlap of Topics</h3> : 
-              articles.map(article => (<div className="odd:h-[60vh] even:h-[55vh] my-auto w-96 hover:lg:w-[26rem] ease-in-out duration-1000 hover:odd:lg:h-[61vh] hover:even:lg:h-[56vh]" key={article.id}><Card page={article}></Card></div>))}
-            </Flicking>}
-            // catch (e) {
-            //   console.log("here");
-            //   return <> WTF {e.message}</>
-            // }}
     return(
     <div className="min-h-screen">
       <div className="">
         <Navbar/>
         <Seo/>
         <Flicking id="flicking0" renderOnlyVisible={true} className="flicking flicking0" moveType="freeScroll" bound={true} preventClickOnDrag={false}>
-          {tagNames.map(tag => {
+          {ready && tagNames.map(tag => {
             return <div className="flicking-panel" key={tag.id} onClick={()=> select(tag.name)}>
                   <Tag key={tag.id} tag={tag} selected={selected.includes(tag.name)}/>
             </div>
@@ -77,7 +68,10 @@ export default function Explore ({pages, tagNames}: props) {
           }
         </Flicking>
         <div className="flex items-center flex-wrap h-[70vh] ease-in-out duration-1000">
-            <div className="hidden pt-4 pb-2 m-auto font-serif text-4xl text-center duration-200 ease-in-out md:block">{articles.length != 0 && panels.current? panels.current.currentPanel? articles[panels.current.index]? articles[panels.current.index].title: articles[0].title: articles[0].title: ""}</div>
+            <div className="hidden pt-4 pb-2 m-auto font-serif text-4xl text-center duration-200 ease-in-out md:block w-full">{articles.length != 0 && panels.current? panels.current.currentPanel? articles[panels.current.index]? articles[panels.current.index].title: articles[0].title: articles[0].title: ""}</div>
+            <p className="text-lg text-center m-auto text-neutral max-w-[24rem]">
+              {articles.length != 0 && panels.current? panels.current.currentPanel? articles[panels.current.index]? nothing(articles[panels.current.index].from): nothing(articles[0].from): nothing(articles[0].from): ""}-{articles.length != 0 && panels.current? panels.current.currentPanel? articles[panels.current.index]? nothing(articles[panels.current.index].to): nothing(articles[0].to): nothing(articles[0].to): ""}
+            </p>
           <div className="w-screen duration-1000 ease-in-out">
             {/* <Carousel/> */}
             <Flicking id="flicking1" className="flicking flicking1" onReady={() => setReady(!ready)} plugins={plugins} align={"center"} deceleration={0.02} onChanged={(e: ChangedEvent) => {setCurrentPanel(e.index)}} ref={panels as any}>
@@ -94,6 +88,15 @@ export default function Explore ({pages, tagNames}: props) {
     )
 }
 
+function nothing(num: number): string|number {
+  if (num == 0) {
+    return ""
+  }
+  else {
+    return num
+  }
+
+}
 export async function getStaticProps() {
   const pages: IPages = await getPages();
   const tagNames: ITag[] = await getTags();

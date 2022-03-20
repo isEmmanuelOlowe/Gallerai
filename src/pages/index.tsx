@@ -29,7 +29,7 @@ export default function HomePage({tags}: props) {
           <main className='content-center justify-center w-full mt-24 text-center'>
             <h1 className='text-5xl'>Mathematics in the Scottish Enlightenment</h1>
             <p>
-              Explore the world of Mathematics in the Period of Scotland between 1650-1820
+              Explore the world of Mathematics in the Period of Scotland between 1690-1820
             </p>
             <div className="mt-16 font-serif divider"><h2>How to Use</h2></div>
             <p>
@@ -48,7 +48,7 @@ export default function HomePage({tags}: props) {
 
 const customRenderer = (tag: any, size: number, color: string) => {
   return (
-    <UnderlineLink key={tag.value} style={{ color, fontSize: `${size}px` }}  className='p-2 m-2 text-accent-content m-[3px] border-b-2 border-black hover:scale-110 hover:border-white ease-in-out duration-150 font hover:text-white' href={`/explore?tags=${encodeURI(tag.value)}`} >{tag.value}</UnderlineLink>
+    <UnderlineLink key={tag.value} style={{ color, fontSize: `${size}px` }}  className='p-2 text-accent-content m-[3px] hover:scale-105 hover:text ease-in-out duration-200 font hover:text-primary-focus' href={`/explore?tags=${encodeURI(tag.value)}`} >{tag.value}</UnderlineLink>
   )
 }
 /**
