@@ -67,11 +67,11 @@ export default function Explore ({pages, tagNames}: props) {
             })
           }
         </Flicking>
-        <div className="flex items-center flex-wrap h-[70vh] ease-in-out duration-1000">
-            <div className="hidden pt-4 pb-2 m-auto font-serif text-4xl text-center duration-200 ease-in-out md:block w-full">{articles.length != 0 && panels.current? panels.current.currentPanel? articles[panels.current.index]? articles[panels.current.index].title: articles[0].title: articles[0].title: ""}</div>
-            <p className="text-lg text-center m-auto text-neutral max-w-[24rem]">
-              {articles.length != 0 && panels.current? panels.current.currentPanel? articles[panels.current.index]? nothing(articles[panels.current.index].from): nothing(articles[0].from): nothing(articles[0].from): ""}-{articles.length != 0 && panels.current? panels.current.currentPanel? articles[panels.current.index]? nothing(articles[panels.current.index].to): nothing(articles[0].to): nothing(articles[0].to): ""}
-            </p>
+            <div className="hidden w-full pt-4 pb-2 mx-auto my-0 font-serif text-4xl text-center duration-200 ease-in-out md:block">{articles.length != 0 && panels.current? panels.current.currentPanel? articles[panels.current.index]? articles[panels.current.index].title: articles[0].title: articles[0].title: ""}</div>
+            {articles.length != 0 && <p className="text-lg text-center mx-auto text-neutral max-w-[24rem]">
+              {panels.current? panels.current.currentPanel? articles[panels.current.index]? nothing(articles[panels.current.index].from): nothing(articles[0].from): nothing(articles[0].from): ""}-{panels.current? panels.current.currentPanel? articles[panels.current.index]? nothing(articles[panels.current.index].to): nothing(articles[0].to): nothing(articles[0].to): ""}
+            </p>}
+        <div className="flex items-center flex-wrap h-[70vh] ease-in-out duration-1000 mt-[-2.5rem]">
           <div className="w-screen duration-1000 ease-in-out">
             {/* <Carousel/> */}
             <Flicking id="flicking1" className="flicking flicking1" onReady={() => setReady(!ready)} plugins={plugins} align={"center"} deceleration={0.02} onChanged={(e: ChangedEvent) => {setCurrentPanel(e.index)}} ref={panels as any}>
@@ -80,7 +80,7 @@ export default function Explore ({pages, tagNames}: props) {
             </Flicking>
           </div>
           </div>
-            <p className="mt-5 text-lg text-center m-auto text-neutral max-w-[24rem]">
+            <p className="mt-3 text-lg text-center m-auto text-neutral max-w-[24rem]">
               {articles.length != 0 && panels.current? panels.current.currentPanel? articles[panels.current.index]? articles[panels.current.index].summary: articles[0].summary: articles[0].summary: ""}
             </p>
         </div>

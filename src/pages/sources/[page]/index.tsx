@@ -37,7 +37,7 @@ export default function Source({source}: IProps) {
                   })} */}
                 </div>
                 <div className='mt-5 text-center'>
-                  <UnderlineLink href={source? source.url? source.url:"": ""}><h1 className='text-4xl'>{source? source.name: "Loading..."}</h1></UnderlineLink>
+                  <UnderlineLink className="hover:text-primary-focus" href={source? source.url? source.url:"": ""}><h1 className='text-4xl'>{source? source.name: "Loading..."}</h1></UnderlineLink>
                   
                 </div>
                 <div className='pt-5 text-center text-gray-600 place-content-center'>

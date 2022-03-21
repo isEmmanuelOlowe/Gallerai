@@ -22,10 +22,10 @@ export default function TimelinePage({pages}: props) {
       <div className="h-screen">
       <Navbar/>
       <Seo templateTitle="Timeline of Mathematics in the Scottish Enlightenment"/>
-      <div className="overflow-x-auto flex gap-1 h-screen">
+      <div className="flex h-screen gap-1 overflow-x-auto overflow-y-hidden">
             {
               time.map((column, index) => {
-                  return <div key={index} className="m-0 grid gap-1">
+                  return <div key={index} className="grid gap-1 m-0">
                 {column.map((page) => {
                   return <Link key={page.id} href={`/article/${cleanString(page.title)}`} passHref>
                   <div style={{"backgroundImage":`url(${page.cover})`}} className={`w-96 bg-neutral text-white text-center bg-cover rounded-md row-span-1 ease-in-out duration-200 hover:scale-110`}>

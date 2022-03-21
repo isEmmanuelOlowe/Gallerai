@@ -35,7 +35,7 @@ export default function Article({article, sources, related}: IProps) {
                 </div>
                 <div className='flex flex-wrap pt-5 text-gray-600 place-content-center'>
                   {article?.tags && article.tags.map(tag => {
-                    return (<UnderlineLink className='p-2 m-2 text-accent-content' href={`/explore?tags=${encodeURI(tag)}`} key={tag}>{tag}</UnderlineLink>)
+                    return (<UnderlineLink className='p-2 m-2 text-accent-content hover:text-primary-focus' href={`/explore?tags=${encodeURI(tag)}`} key={tag}>{tag}</UnderlineLink>)
                   })}
                 </div>
                 <div className='pt-20 xl:p-40'>
@@ -52,10 +52,10 @@ export default function Article({article, sources, related}: IProps) {
                     }) :<></>
                   }
                 </div>
-                {article && related && <div className="mt-32 mb-20 lg:m-0 w-full">
+                {article && related && <div className="w-full mt-32 mb-20 lg:m-0">
                         <h2 className="font-serif text-2xl divider">Related</h2>
                   
-                  <ul className="w-full justify-center flex flex-wrap gap-5">
+                  <ul className="flex flex-wrap justify-center w-full gap-5">
                     {related.map((page) => {
                     return <li key={page.id} >
                       <UnderlineLink className="text base list-[square] text-center text-lg text-neutral m-auto" href={`/article/${cleanString(page.title)}`}>{page.title}</UnderlineLink>

@@ -33,10 +33,10 @@ export default function HomePage({tags}: props) {
             </p>
             <div className="mt-16 font-serif divider"><h2>How to Use</h2></div>
             <p>
-              Explore the world of Mathematics in the Scottish Enlightenment through metadata
+              {"Explore the world of Mathematics in the Scottish Enlightenment through metadata. Swipe through and select some tags and find some overlap. Don't forget to Swipe!"}
             </p>
             <div className="mt-16 font-serif divider"><h2>Tags</h2></div>
-            <span className='font-serif font-5xl hflex flex-wrap gap-20'>
+            <span className='flex-wrap gap-20 font-serif font-5xl hflex'>
               <TagCloud minSize={20} maxSize={40} disableRandomColor={true} renderer={customRenderer} shuffle={false} tags={bag}/>
             </span>
           </main>
