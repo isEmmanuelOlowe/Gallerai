@@ -8,7 +8,7 @@ import SourceSection from '@/components/section/SourceSection';
 import Selector from "@/components/Selector";
 import Seo from "@/components/Seo";
 
-import { cleanString, getPageContent,getPages, getPageSources, IPage, IPages, ISource } from '@/notion/notion';
+import { cleanString, getPageContent,getPages, getPageSources, IPage, IPages, ISource, nothing } from '@/notion/notion';
 
 interface IProps {
   article: IPage,
@@ -32,6 +32,9 @@ export default function Article({article, sources, related}: IProps) {
               <article className='w-[95%] min-h-screen p-4 mt-32 bg-neutral-content md:p-20 md:w-5/6'>
                 <div className='mt-5 text-center'>
                   <h1 className='text-4xl'>{article? article.title: "Loading..."}</h1>
+                           {article && !(article.from == article.to && article.to == 0) && <p className="text-lg text-center mx-auto text-neutral max-w-[24rem]">
+              {nothing(article.from)}-{nothing(article.to)}
+            </p>}
                 </div>
                 <div className='flex flex-wrap pt-5 text-gray-600 place-content-center'>
                   {article?.tags && article.tags.map(tag => {
@@ -52,7 +55,7 @@ export default function Article({article, sources, related}: IProps) {
                     }) :<></>
                   }
                 </div>
-                {article && related && <div className="w-full mt-32 mb-20 lg:m-0">
+                {article && related.length != 0 && <div className="w-full mt-32 mb-20 lg:m-0">
                         <h2 className="font-serif text-2xl divider">Related</h2>
                   
                   <ul className="flex flex-wrap justify-center w-full gap-5">

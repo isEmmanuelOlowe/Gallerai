@@ -7,7 +7,7 @@ interface props {
   sources: ISource[]
 }
 export default function SourceSection({sources}: props) {
-  if (!sources) {
+  if (!sources || sources.length == 0) {
     return <></>
   }
   return (

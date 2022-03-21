@@ -10,7 +10,7 @@ import Navbar from "@/components/Navigation/Navbar";
 import Seo from "@/components/Seo";
 import Tag from '@/components/Tag';
 
-import { getPages, getTags, IPage, IPages, ITag} from "@/notion/notion";
+import { getPages, getTags, IPage, IPages, ITag, nothing} from "@/notion/notion";
 interface props {
   pages: IPages,
   tagNames: ITag[]
@@ -88,15 +88,6 @@ export default function Explore ({pages, tagNames}: props) {
     )
 }
 
-function nothing(num: number): string|number {
-  if (num == 0) {
-    return ""
-  }
-  else {
-    return num
-  }
-
-}
 export async function getStaticProps() {
   const pages: IPages = await getPages();
   const tagNames: ITag[] = await getTags();

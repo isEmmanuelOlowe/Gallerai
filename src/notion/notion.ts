@@ -190,7 +190,10 @@ async function getPageData(data_json:any): Promise<IPages> {
 }
 
 /**
- * 
+ * Returns the related pages of a page
+ * @param relatedFrom 
+ * @param relatedTo 
+ * @returns 
  */
 function getRelated(relatedFrom: any, relatedTo: any) {
   const related: string[] = [];
@@ -361,4 +364,18 @@ function getPageSourceIDs(SourceData: any): string[] {
     sources.push(SourceData[i].id);
   }
   return sources;
+}
+
+/**
+ * Returns a number if it is greater than zero or an empty string otherwise
+ * @param num a number
+ * @returns returns a number if it is not equal to zero
+ */
+export function nothing(num: number): string|number {
+  if (num == 0) {
+    return ""
+  }
+  else {
+    return num
+  }
 }
