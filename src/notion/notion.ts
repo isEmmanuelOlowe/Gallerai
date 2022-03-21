@@ -114,7 +114,7 @@ function extractSources(response: any): ISources {
     const source: ISource = {
       id: response.results[i].id,
       name: response.results[i].properties["Name"]["title"][0]["plain_text"],
-      type: response.results[i].properties["Type"]["select"]["name"],
+      type: response.results[i].properties["Type"]["select"]? response.results[i].properties["Type"]["select"]["name"]:"",
       authors: getAuthors(response.results[i].properties["Author"]["multi_select"]),
       publisher: response.results[i].properties["Publisher"]["select"]? response.results[i].properties["Publisher"]["select"]["name"]:null,
       year: response.results[i].properties["Publishing/Release Date"]["number"],

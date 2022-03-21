@@ -79,12 +79,3 @@ export async function getStaticProps() {
     }
   }
 }
-
-
-function dateRange(from: number, to: number, spacing: number): number[] {
-  const numbers = []
-  for (let i = from; i <= to; i+= spacing) {
-    numbers.push(i);
-  }
-  return numbers;
-}
