@@ -17,7 +17,6 @@ interface IProps {
 }
 export default function Article({article, sources, related}: IProps) {
   const router = useRouter();
-  console.log(related);
   if (!router.isFallback && !article?.title) {
     return <Error error="Page Not Found"/>
   }

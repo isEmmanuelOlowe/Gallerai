@@ -1,9 +1,9 @@
-import { makeConsoleLogger } from "@notionhq/client/build/src/logging";
+import Link from 'next/link';
 
 import Navbar from "@/components/Navigation/Navbar";
 import Seo from "@/components/Seo";
 
-import { getPages,  IPage,  IPages} from "@/notion/notion";
+import { cleanString, getPages,  IPage,  IPages} from "@/notion/notion";
 
 interface props {
   pages: IPages
@@ -27,7 +27,8 @@ export default function TimelinePage({pages}: props) {
               time.map((column, index) => {
                   return <div key={index} className="m-0 grid gap-1">
                 {column.map((page) => {
-                  return <div key={page.id} style={{"backgroundImage":`url(${page.cover})`}} className={`w-96 bg-neutral text-white text-center bg-cover rounded-md row-span-1 ease-in-out duration-200 hover:scale-110`}>
+                  return <Link key={page.id} href={`/article/${cleanString(page.title)}`} passHref>
+                  <div style={{"backgroundImage":`url(${page.cover})`}} className={`w-96 bg-neutral text-white text-center bg-cover rounded-md row-span-1 ease-in-out duration-200 hover:scale-110`}>
                     <div className="flex flex-wrap h-full m-auto bg-black rounded-md content-centerw-full bg-opacity-30">
                       <div className="flex w-full h-5 text-center bg-black bg-opacity-10 rounded-t-md">
                         <p className="m-auto text-center">{page.from == 0? "": page.from}</p>
@@ -36,6 +37,7 @@ export default function TimelinePage({pages}: props) {
                       <h2 className="m-auto shadow-sm">{page.title}</h2>
                       </div>
                     </div>
+                  </Link>
                 })}
                 </div>
               })

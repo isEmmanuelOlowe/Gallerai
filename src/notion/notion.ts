@@ -309,6 +309,10 @@ function addBlock(blockType: any): IContent{
       case "text":
         content = {"type":"text", "content": blockType["text"]["content"]};
         break;
+      case "bulleted_list_item":
+        content = extractComposite(blockType["bulleted_list_item"]["text"])
+        content.type = "bulleted_list_item";
+        break;
       default:
         if (blockType["paragraph"] === undefined) {
           content = {"type":"break", "content": ""};
@@ -319,11 +323,8 @@ function addBlock(blockType: any): IContent{
         else if (blockType["paragraph"]["text"].length == 0) {
           content = {"type":"break", "content": ""};
         }
-        else if (blockType["paragraph"]["text"].length > 1) {
+        else  {
           content = extractComposite(blockType["paragraph"]["text"]);
-        }
-        else {
-          content =  {"type":"text", "content": blockType["paragraph"]["text"]["0"]["text"]["content"]}
         }
     }
     return content

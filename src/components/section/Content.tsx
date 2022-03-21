@@ -20,6 +20,12 @@ export default function Content({content, block = true}: props) {
       <h4 className="pt-2 pb-2 font-serif text-xl">{content.content}</h4>
     )
   }
+  else if (content.type === "bulleted_list_item")
+    return (
+      <li> {content.contents?.map((item, index) => {
+          return <Content key={index} content={item} block={false}/>})}
+          </li>
+    )
   else if (content.type === "quote") {
     return (
       <p className='text-[0.91rem] md:text-base border-l-2 border-neutral-focus p-5 opacity-80 font-serif'>&quot;{content.content}&quot;</p>
