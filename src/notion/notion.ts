@@ -125,7 +125,11 @@ function extractSources(response: any): ISources {
   return sources
 }
 
-
+/**
+ * Gets all the authors of a source
+ * @param authorsJson the notion json
+ * @returns the authors of a source
+ */
 function getAuthors(authorsJson: any): string[] {
   const authors: string[] = [];
   for (let i = 0; i < authorsJson.length; i++) {
@@ -191,9 +195,9 @@ async function getPageData(data_json:any): Promise<IPages> {
 
 /**
  * Returns the related pages of a page
- * @param relatedFrom 
- * @param relatedTo 
- * @returns 
+ * @param relatedFrom The pages that link the article as related
+ * @param relatedTo  The pages this article relates to
+ * @returns The set union of both
  */
 function getRelated(relatedFrom: any, relatedTo: any) {
   const related: string[] = [];

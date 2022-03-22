@@ -51,7 +51,9 @@ export default function Content({content, block = true}: props) {
   }
   else if (content.type === "composite") {
     return (
-      <p>
+      <p className='first:first-letter:font-serif 
+  first:first-letter:text-7xl first:first-letter:font-bold
+  first:first-letter:mr-3 first:first-letter:float-left pb-5 first:first-letter:mt-[-1.5rem]'>
         {content.contents?.map((item, index) => {
           return <Content key={index} content={item} block={false}/>})}
       </p>
